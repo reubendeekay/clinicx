@@ -1,1 +1,1 @@
-# ClinixX Front end
+# ClinicX Front end
