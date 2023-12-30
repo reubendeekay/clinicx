@@ -1,74 +1,128 @@
-
-.navbar{
- width: 85%;
- margin: 20px auto;
- background-color: aquamarine;
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
+.navbar {
+  width: 85%;
+  margin: 20px auto;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navbar .logo{
- display: flex;
- gap: 10px;
- align-items: center;
+.navbar .logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.navbar .logo span{
- color: var(--navy);
- font-weight: bold;
- font-size: 20px;
- font-family: 'Kanit', sans-serif;
- font-weight: 500;
+.navbar .logo span {
+  color: var(--navy);
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
 }
 
-.navbar .links span{
- margin: 0px 8px;
+.navbar .links span {
+  margin: 0px 8px;
 }
 
-@media screen and (max-width: 980px){
- .navbar .logo img{
- transform: scale(0.6);
- transition: all .5s ease-in;
- }
- 
- .navbar .logo{
-  gap: 5px;
- }
+@media screen and (max-width: 980px) {
+  .navbar .logo img {
+    transform: scale(0.6);
+    transition: all 0.5s ease-in;
+  }
 
- .tiles{
+  .navbar .logo {
+    gap: 5px;
+  }
+
+  .tiles {
+    flex-direction: column;
+    gap: 65px;
+  }
+
+  .rated{
+   margin: 50px auto;
+  }
+
+  .specialties {
+   flex-direction: column;
+   gap: 30px;
+  }
+
+  .specialties h3{
+   text-align: center;
+  }
+
+  
+}
+
+.rated {
+  width: 85%;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.rated h3 {
+  font-size: 36px;
+  font-family: "Baloo Da 2", sans-serif;
+  color: var(--blue);
+}
+
+.rated p {
+  color: var(--grey);
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.rated p:last-of-type {
+  color: var(--purple);
+}
+
+.tiles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.specialties {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  height: max-content;
+}
+
+.specialties h3 {
+  font-size: 36px;
+  color: var(--blue);
+}
+
+.specialties .types {
+  max-width: 700px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 12rem));
+}
+
+.specialties .types div{
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  display: flex;
   flex-direction: column;
-  gap: 30px;
- }
+  justify-content: space-evenly;
+  text-align: center;
+  border-radius: 25px;
+  /* background-color: var(--lightgrey); */
+  background-color: beige;
 }
 
-.rated{
- width: 85%;
- margin: 140px auto;
- text-align: center;
-}
-
-.rated h3{
- font-size: 36px;
- font-family: 'Baloo Da 2', sans-serif;
+.specialties .types div span{
+ font-weight: 700;
  color: var(--blue);
 }
 
-.rated p{
- color: var(--grey);
- margin-top: 15px;
- font-weight: 500;
-}
-
-.rated p:last-of-type{
- color:var(--purple);
-}
-
-
-.tiles{
- display: flex;
- justify-content: space-between;
- align-items: center;
- margin-top: 50px;
+.specialties .types div svg {
+ margin: 0 auto;
 }
