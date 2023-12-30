@@ -1,0 +1,11 @@
+<div class="card">
+ <p class="title">{{title}}</p>
+ <div class="tag" [style.background-color]="getBackgroundColorWithOpacity()" [style.color]="color">{{tag}}</div>
+
+ <div class="details"><p>{{specialization}}</p>
+ <p>{{city}}</p>
+<p>⭐{{rating}} {{reviews}} reviews</p></div>
+
+<p class="description">{{description}}</p>
+<img class="descriptionimg" [src]="imagepath || ''" alt="doctors">
+</div>

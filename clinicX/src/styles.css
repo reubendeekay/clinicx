@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+:root{
+ --navy: #271E4A;
+ --blue: #12175E;
+ --grey: #65677B;
+ --purple: #5B67CA;
+ --teal: #05B4FE;
+ --gold: #FFB800;
+ --subtitle: #00000066;
+}
+
+
+*{
+ font-family: 'Yantramanav', sans-serif;
+}
