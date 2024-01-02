@@ -41,20 +41,37 @@
     gap: 65px;
   }
 
-  .rated{
-   margin: 50px auto;
+  .rated {
+    margin: 50px auto;
   }
 
   .specialties {
-   flex-direction: column;
-   gap: 30px;
+    flex-direction: column;
+    gap: 30px;
   }
 
-  .specialties h3{
-   text-align: center;
+  .specialties h3 {
+    text-align: center;
   }
 
-  
+  .private, .jobs {
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .private div{
+    margin-top: -40px;
+  }
+
+  .partner div {
+    display: flex;
+    flex-direction: column;
+  }
+  .moreinfo{
+    width: 100%;
+    margin: 30px 0px;
+    padding: 10px 20px;
+  }
 }
 
 .rated {
@@ -105,7 +122,7 @@
   grid-template-columns: repeat(auto-fit, minmax(12rem, 12rem));
 }
 
-.specialties .types div{
+.specialties .types div {
   width: 150px;
   height: 150px;
   margin: 20px;
@@ -118,11 +135,102 @@
   background-color: beige;
 }
 
-.specialties .types div span{
- font-weight: 700;
- color: var(--blue);
+.specialties .types div span {
+  font-weight: 700;
+  color: var(--blue);
 }
 
 .specialties .types div svg {
- margin: 0 auto;
+  margin: 0 auto;
+}
+
+.landingBtn {
+  padding: 10px 20px;
+  border: 0;
+  outline: 0;
+  color: white;
+  background: var(--purple);
+  border-radius: 25px;
+  font-family: "Baloo Da 2", sans-serif;
+  margin-top: 30px;
+  font-weight: 700;
+}
+
+.private,
+.partner,
+.moreinfo, .jobs {
+  width: 85%;
+  margin: 30px auto;
+  margin-top: 120px;
+  color: var(--blue);
+}
+
+.private, .jobs {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}
+
+.partner,
+.moreinfo {
+  text-align: center;
+}
+
+.partner div img {
+  margin: 10px 20px;
+}
+
+.private div p,
+.partner p,
+.moreinfo p , .jobs div p{
+  font-family: "Baloo Da 2", sans-serif;
+  font-weight: 700;
+}
+
+.private div h3,
+.partner h3, .jobs div h3 {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.private div ul {
+  padding-left: 15px;
+}
+
+.common{
+  width: 85%;
+}
+
+.common,
+.find,
+.find div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.find div {
+  flex-direction: column;
+}
+
+.common p,
+.find div p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.common p:before,
+.find div p:before {
+  display: inline-block;
+  content: "";
+  background-image: url("../assets/Images/leftarrow.png");
+  background-size: 20px 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.moreinfo{
+  background-color: var(--lightgrey);
+  padding: 20px 40px;
+  border-radius: 25px;
 }

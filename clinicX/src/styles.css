@@ -14,3 +14,8 @@
 *{
  font-family: 'Yantramanav', sans-serif;
 }
+
+body{
+ width: 100%;
+ overflow-x: hidden;
+}
