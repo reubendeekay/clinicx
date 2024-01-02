@@ -71,7 +71,8 @@
   }
 
   .specialties,
-  .footer, .medicalform{
+  .footer,
+  .medicalform {
     flex-direction: column;
     gap: 30px;
   }
@@ -80,7 +81,7 @@
     text-align: center;
   }
 
-  .specialties .types{
+  .specialties .types {
     display: grid;
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -101,14 +102,21 @@
   }
   .moreinfo {
     width: 100%;
-    margin: 30px 0px;
-    padding: 10px 20px;
+    margin: 0px auto !important;
+    padding: 10px !important;
   }
+
+  .moreinfo .find div p , .common p{
+    font-size: 12px;
+  }
+
+
+
   .footerinfo {
     font-size: 13px;
   }
 
-  .medicalform form{
+  .medicalform form {
     width: 85%;
     margin: 0px;
   }
@@ -210,7 +218,7 @@
   color: var(--blue);
 }
 
-.footer{
+.footer {
   padding: 30px 0;
 }
 
@@ -255,7 +263,7 @@
 }
 
 .common {
-  width: 85%;
+  width: 90%;
 }
 
 .common,
@@ -304,7 +312,13 @@
   border-radius: 25px;
 }
 
-.homeContainer{
+.homeContainer {
   box-sizing: content-box;
-   background: linear-gradient(180deg, #D9D8FF 0%, rgba(255, 187, 187, 0.838515) 16.15%, rgba(255, 217, 201, 0.661424) 39.07%, rgba(255, 228, 228, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    #d9d8ff 0%,
+    rgba(255, 187, 187, 0.838515) 16.15%,
+    rgba(255, 217, 201, 0.661424) 39.07%,
+    rgba(255, 228, 228, 0) 100%
+  );
 }

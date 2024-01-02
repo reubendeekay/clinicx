@@ -12,13 +12,11 @@
   );
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 .outter {
   background-color: white;
   height: 80%;
-  min-width: max-content;
   width: 80%;
   opacity: 60%;
   position: absolute;
@@ -51,7 +49,6 @@
 .logincontent h3 , .logincontent p, input{
   font-family: "Poppins", sans-serif;
   text-align: center;
-
 }
 
 input{
@@ -128,5 +125,11 @@ padding: 20px;
 
  .loginimage{
   display: none;
+ }
+}
+
+@media screen and (max-width: 400px){
+   .logincontent{
+  left: 15%;
  }
 }
