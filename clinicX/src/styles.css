@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 :root{
  --navy: #271E4A;
  --blue: #12175E;
@@ -15,9 +18,14 @@
  font-family: 'Yantramanav', sans-serif;
 }
 
-body{
+body,html{
  width: 100%;
+ height: 100%;
  overflow-x: hidden;
- background: linear-gradient(180deg, #D9D8FF 0%, rgba(255, 187, 187, 0.838515) 16.15%, rgba(255, 217, 201, 0.661424) 39.07%, rgba(255, 228, 228, 0) 100%);
+ margin: 0;
+}
 
+a{
+ text-decoration: none;
+ color: inherit;
 }
