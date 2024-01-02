@@ -1,7 +1,6 @@
 .navbar {
   width: 85%;
   margin: 20px auto;
-  background-color: aquamarine;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -26,6 +25,32 @@
   margin: 0px 8px;
 }
 
+.medicalform h2 {
+  font-family: "Baloo Da 2", sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+}
+
+.medicalform form {
+  background-color: var(--lightgrey);
+  width: 470px;
+  max-width: 470px;
+  padding: 40px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.medicalform input {
+  outline: 0;
+  border: 0;
+  font-family: "Baloo Da 2", sans-serif;
+  font-size: 16px;
+  background-color: var(--lightgrey);
+  padding: 15px 0;
+  border-bottom: 1px solid #e4e4e4;
+}
+
 @media screen and (max-width: 980px) {
   .navbar .logo img {
     transform: scale(0.6);
@@ -45,7 +70,8 @@
     margin: 50px auto;
   }
 
-  .specialties {
+  .specialties,
+  .footer, .medicalform{
     flex-direction: column;
     gap: 30px;
   }
@@ -54,12 +80,13 @@
     text-align: center;
   }
 
-  .private, .jobs {
+  .private,
+  .jobs {
     flex-direction: column;
     gap: 0px;
   }
 
-  .private div{
+  .private div {
     margin-top: -40px;
   }
 
@@ -67,10 +94,18 @@
     display: flex;
     flex-direction: column;
   }
-  .moreinfo{
+  .moreinfo {
     width: 100%;
     margin: 30px 0px;
     padding: 10px 20px;
+  }
+  .footerinfo {
+    font-size: 13px;
+  }
+
+  .medicalform form{
+    width: 85%;
+    margin: 0 auto;
   }
 }
 
@@ -108,12 +143,14 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: max-content;
 }
 
 .specialties h3 {
   font-size: 36px;
   color: var(--blue);
+  font-weight: 800;
 }
 
 .specialties .types {
@@ -132,7 +169,7 @@
   text-align: center;
   border-radius: 25px;
   /* background-color: var(--lightgrey); */
-  background-color: beige;
+  background-color: var(--lightgrey);
 }
 
 .specialties .types div span {
@@ -140,7 +177,7 @@
   color: var(--blue);
 }
 
-.specialties .types div svg {
+.specialties .types div img {
   margin: 0 auto;
 }
 
@@ -158,14 +195,23 @@
 
 .private,
 .partner,
-.moreinfo, .jobs {
+.moreinfo,
+.jobs,
+.map,
+.footer,
+.medicalform {
   width: 85%;
   margin: 30px auto;
   margin-top: 120px;
   color: var(--blue);
 }
 
-.private, .jobs {
+.map img {
+  width: 100%;
+}
+
+.private,
+.jobs {
   display: flex;
   justify-content: space-between;
   gap: 100px;
@@ -182,13 +228,16 @@
 
 .private div p,
 .partner p,
-.moreinfo p , .jobs div p{
+.moreinfo p,
+.jobs div p,
+.footerinfo {
   font-family: "Baloo Da 2", sans-serif;
   font-weight: 700;
 }
 
 .private div h3,
-.partner h3, .jobs div h3 {
+.partner h3,
+.jobs div h3 {
   font-size: 36px;
   font-weight: 800;
 }
@@ -197,15 +246,27 @@
   padding-left: 15px;
 }
 
-.common{
+.common {
   width: 85%;
 }
 
 .common,
 .find,
-.find div {
+.find div,
+.footer,
+.footerinfo,
+.footerlogo,
+.socials,
+.medicalform {
   display: flex;
   justify-content: space-between;
+}
+
+.footerinfo,
+.footerlogo,
+.socials {
+  align-items: center;
+  gap: 20px;
 }
 
 .find div {
@@ -229,7 +290,7 @@
   width: 20px;
 }
 
-.moreinfo{
+.moreinfo {
   background-color: var(--lightgrey);
   padding: 20px 40px;
   border-radius: 25px;

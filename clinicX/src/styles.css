@@ -18,4 +18,6 @@
 body{
  width: 100%;
  overflow-x: hidden;
+ background: linear-gradient(180deg, #D9D8FF 0%, rgba(255, 187, 187, 0.838515) 16.15%, rgba(255, 217, 201, 0.661424) 39.07%, rgba(255, 228, 228, 0) 100%);
+
 }
