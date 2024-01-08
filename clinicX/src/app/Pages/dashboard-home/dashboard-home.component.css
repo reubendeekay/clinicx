@@ -15,10 +15,9 @@
 }
 
 .outter {
-  background-color: white;
+  background-color: rgb(255, 255, 255, 0.6);
   height: 90%;
   width: 90%;
-  opacity: 60%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,13 +27,12 @@
 .inner {
   background: radial-gradient(
     43.3% 107.22% at 51.09% 40.44%,
-    #eff2f6 0%,
-    #f6e3eb 47.58%,
-    #d5deed 93.12%
+    rgba(239, 242, 246, 0.3) 0%,
+    rgb(246, 227, 235, 0.3) 47.58%,
+    rgb(213, 222, 237, 0.3) 93.12%
   );
-    height: 100%;
+  height: 100%;
   width: 90%;
   position: absolute;
   right: 0;
-  opacity: 30%;
 }
