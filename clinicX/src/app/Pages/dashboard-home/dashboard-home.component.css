@@ -151,3 +151,15 @@
   padding: 5px 10px;
   border-radius: 10px;
 }
+
+
+/* patient form styles */
+.form div{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+.form div input{
+  flex: 1;
+}

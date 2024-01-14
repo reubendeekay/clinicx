@@ -1,1 +1,190 @@
-<p>patient-form works!</p>
+<div class="dashboard">
+  <div class="outter">
+    <div class="inner">
+      <app-topbar title="Patient"></app-topbar>
+      <!-- router outlet will go -->
+      <div class="main-content">
+        <div class="card" style="width: 97%">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h3>Add Patient Information</h3>
+            <p-button
+              label="Patient List"
+              severity="warning"
+              [style]="{
+                backgroundColor: '#FF706F',
+                height: '29px',
+                outline: 'none',
+              }"
+            ></p-button>
+          </div>
+          <div class="form">
+            <div>
+              <input
+                pInputText
+                type="text"
+                placeholder="First Name *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="text"
+                placeholder="Last Name *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+            </div>
+            <div>
+              <input
+                pInputText
+                type="text"
+                placeholder="Email Id *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="text"
+                placeholder="Mobile Number *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="date"
+                placeholder="Age *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+            </div>
+            <div>
+              <input
+                pInputText
+                type="text"
+                placeholder="Gender *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="text"
+                placeholder="Marital Status *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="text"
+                placeholder="Age *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <input
+                pInputText
+                type="text"
+                placeholder="Blood Group *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+            </div>
+            <div>
+              <input
+                pInputText
+                type="text"
+                placeholder="Address *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+            </div>
+            <div>
+              <input
+                pInputText
+                type="text"
+                placeholder="Upload Image"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+              <p-fileUpload
+                mode="basic"
+                chooseLabel="Upload Image"
+                name="demo[]"
+                url="https://www.primefaces.org/cdn/api/upload.php"
+                accept="image/*"
+                [maxFileSize]="1000000"
+                
+                [style]="{
+                  height: '29px',
+                  marginBottom: '-27px',
+                  marginLeft: '-20px',
+                  backgroundColor: '#79CFA6',
+                  border: 0,
+                }"
+              ></p-fileUpload>
+              <input
+                pInputText
+                type="text"
+                placeholder="Suggestion *"
+                style="
+                  border: none;
+                  border-bottom: 1px solid #271e4a;
+                  border-radius: 0;
+                "
+              />
+            </div>
+          </div>
+          <p-button
+            label="Submit"
+            severity="help"
+            [style]="{
+              marginTop: '20px',
+              backgroundColor: '#CA79C6',
+              height: '29px',
+              outline: 'none',
+              borderRadius: '47px',
+              marginLeft: '90%'
+            }"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
