@@ -1,12 +1,132 @@
 <div class="dashboard">
   <div class="outter">
-   <div class="inner">
-    <app-topbar title="Dashboard"></app-topbar>
-    <!-- router outlet will go -->
-   </div>
+    <div class="inner">
+      <app-topbar title="Dashboard"></app-topbar>
+      <!-- router outlet will go -->
+      <div class="main-content">
+        <div class="tiles">
+          <div class="card">
+            <img src="../../../assets/Images/tile1.png" alt="div1" />
+            <div>
+              <h4>250</h4>
+              <p>OPD Today</p>
+            </div>
+          </div>
+          <div class="card">
+            <img alt="div1" src="../../../assets/Images/tile2.png"  />
+            <div>
+              <h4>89</h4>
+              <p>Relieved Today</p>
+            </div>
+          </div>
+          <div class="card"> 
+            <img alt="div1" src="../../../assets/Images/tile3.png" />
+            <div>
+              <h4>300</h4>
+              <p>InPatient Today</p>
+            </div>
+          </div>
+          <div class="card">
+            <img alt="div1" src="../../../assets/Images/tile4.png" />
+            <div>
+              <h4>52</h4>
+              <p>Ventilator</p>
+            </div>
+          </div>
+        </div>
+        <div class="charts">
+          <div class="card">
+            <h3>Hospital Survey</h3>
+            <p-chart type="line" [data]="data" [options]="options"></p-chart>
+          </div>
+          <div class="card">
+            <h3>Common Diseases Report</h3>
+            <p-chart
+              type="bar"
+              [data]="bardata"
+              [options]="baroptions"
+            ></p-chart>
+          </div>
+        </div>
+
+        <div class="tables">
+          <div class="card">
+            <h3>Booked Appointments</h3>
+            <p-table
+              [value]="appointments"
+              [tableStyle]="{ 'font-size': '12px' }"
+            >
+              <ng-template pTemplate="header" let-appointmentsHeader>
+                <tr>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">#</th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">Patient Name</th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">
+                    Assigned Doctor
+                  </th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">Date</th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">Diseases</th>
+                  <th
+                    [style]="{
+                      backgroundColor: '#EDF4FC',
+                      textAlign: 'center'
+                    }"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-appointment>
+                <tr>
+                  <td>{{ appointment.number }}</td>
+                  <td>{{ appointment.patientName }}</td>
+                  <td>{{ appointment.assignedDoctor }}</td>
+                  <td>{{ appointment.date }}</td>
+                  <td>
+                    <span
+                      [style]="{
+                        backgroundColor: '#FF706F',
+                        color: '#ffffff',
+                        textAlign: 'center',
+                        padding: '4px 8px'
+                      }"
+                      >{{ appointment.diseases }}</span
+                    >
+                  </td>
+                  <td class="icons">
+                    <i
+                      class="pi pi-pencil"
+                      [style]="{ 'margin-right': '10px' }"
+                    ></i>
+                    <i class="pi pi-trash"></i>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="card">
+            <h3>Doctors List</h3>
+            <p-table
+              [value]="doctorList"
+              [tableStyle]="{ 'font-size': '12px' }"
+            >
+              <ng-template pTemplate="header" let-appointmentsHeader>
+                <tr>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">#</th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">DoctorName</th>
+                  <th [style]="{ backgroundColor: '#EDF4FC' }">Status</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-doctorlist>
+                <tr>
+                  <td>001</td>
+                  <td>{{ doctorlist.DoctorName }}</td>
+                  <td>{{ doctorlist.DoctorName }}</td>
+                </tr></ng-template
+              >
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="main-content">
-    
-  </div>
-  
 </div>
