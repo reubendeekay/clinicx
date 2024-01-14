@@ -6,6 +6,7 @@ import { DashboardHomeComponent } from './Pages/dashboard-home/dashboard-home.co
 import { BranchComponent } from './Pages/branch/branch.component';
 import { PatientlistComponent } from './Pages/patientlist/patientlist.component';
 import { PatientFormComponent } from './Pages/patient-form/patient-form.component';
+import { PatientProfileComponent } from './Pages/patient-profile/patient-profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
   { path: 'branchmanagement', component: BranchComponent },
   { path: 'patientmanagement', component: PatientlistComponent },
   { path: 'addPatient', component: PatientFormComponent },
+  { path: 'profile', component: PatientProfileComponent },
 ];

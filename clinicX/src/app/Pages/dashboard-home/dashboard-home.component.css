@@ -15,6 +15,12 @@
   position: fixed;
 }
 
+p,
+h3,
+h4 {
+  font-family: "Kanit";
+}
+
 .outter {
   background-color: rgb(255, 255, 255, 0.6);
   height: 90%;
@@ -152,14 +158,13 @@
   border-radius: 10px;
 }
 
-
 /* patient form styles */
-.form div{
+.form div {
   width: 100%;
   display: flex;
   gap: 20px;
   padding: 10px;
 }
-.form div input{
+.form div input {
   flex: 1;
 }

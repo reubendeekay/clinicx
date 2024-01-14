@@ -1,1 +1,115 @@
-<p>patient-profile works!</p>
+<div class="dashboard">
+  <div class="outter">
+    <div class="inner">
+      <app-topbar title="Patient"></app-topbar>
+      <!-- router outlet will go -->
+      <div class="main-content">
+        <div class="card" style="width: 97%">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h3>Add Patient Information</h3>
+            <div>
+              <p-button
+                label="Patient List"
+                severity="warning"
+                [style]="{
+                  backgroundColor: '#FF706F',
+                  height: '29px',
+                  outline: 'none',
+                  marginRight: '10px'
+                }"
+              ></p-button>
+              <p-button
+                label="Add a Patient"
+                severity="help"
+                [style]="{
+                backgroundColor: '#CA79C6',
+                height: '29px',
+                outline: 'none',
+              }"
+              ></p-button>
+            </div>
+          </div>
+          <div class="tables">
+            <img
+              src="../../../assets/Images/profileplaceholder.png"
+              alt="profile"
+            />
+            <div class="card" style="flex: 4">
+              <h4>About Patient</h4>
+              <p style="color: #271e4acc">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+              <div style="display: flex; gap: 40px">
+                <div style="flex: 1">
+                  <h4>Email</h4>
+                  <p style="color: #271e4acc">johnsmith&#64;gmail.com</p>
+                </div>
+                <div style="flex: 1">
+                  <h4>Phone Number</h4>
+                  <p style="color: #271e4acc">0712345678</p>
+                </div>
+                <div style="flex: 2">
+                  <h4>Address</h4>
+                  <p style="color: #271e4acc">Nairobi, Kenya 000100</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tables">
+            <div class="card" style="flex: 2">
+              <h3>Past Visit History</h3>
+              <p-table [value]="history" [tableStyle]="{ 'font-size': '12px' }">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th [style]="{ backgroundColor: '#EDF4FC' }">Date</th>
+                    <th [style]="{ backgroundColor: '#EDF4FC' }">Doctor</th>
+                    <th [style]="{ backgroundColor: '#EDF4FC' }">Treatment</th>
+                    <th [style]="{ backgroundColor: '#EDF4FC' }">Charges</th>
+                    <th [style]="{ backgroundColor: '#EDF4FC' }">Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-activity>
+                  <tr>
+                    <td>{{ activity.date }}</td>
+                    <td>{{ activity.doctor }}</td>
+                    <td>
+                      <span
+                        [style]="{
+                          backgroundColor: '#FF706F',
+                          color: '#ffffff',
+                          padding: '4px 8px',
+                          wrap: 'nowrap'
+                        }"
+                        >{{ activity.Treatment }}</span
+                      >
+                    </td>
+                    <td>${{ activity.charges }}</td>
+
+                    <td class="icons">
+                      <i
+                        class="pi pi-pencil"
+                        [style]="{ 'margin-right': '10px' }"
+                      ></i>
+                      <i class="pi pi-trash"></i>
+                    </td></tr
+                ></ng-template>
+              </p-table>
+            </div>
+            <div class="card" style="flex: 1">
+              <h3>General Report</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
