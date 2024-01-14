@@ -3,9 +3,68 @@
     <div class="inner">
       <app-topbar title="Branch Management"></app-topbar>
       <!-- router outlet will go -->
-     <div class="main-content">
-
-     </div>
+      <div class="main-content">
+        <div class="maps">
+          <img
+            src="../../../assets/Images/kenyanmap.png"
+            height="120px"
+            alt="map of kenya"
+            style="margin-right: 20px"
+          />
+          <img
+            src="../../../assets/Images/branchcounties.png"
+            height="120px"
+            alt="branches in kenya"
+          />
+        </div>
+        <p-table
+          [value]="branchDetails"
+          [tableStyle]="{ 'font-size': '12px' }"
+          [styleClass]="class"
+          [style]="{ 'margin-top': '30px', width: '97%' }"
+        >
+          <ng-template pTemplate="header" let-appointmentsHeader>
+            <tr>
+              <th [style]="{ backgroundColor: '#FFFFFF' }">
+                <input type="checkbox" />
+              </th>
+              <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Branches <p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Something Revelant <p-sortIcon field="code"></p-sortIcon>
+              </th>
+               <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Something Revelant <p-sortIcon field="code"></p-sortIcon>
+              </th>
+               <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Service Availability <p-sortIcon field="code"></p-sortIcon>
+               </th>
+              <th [style]="{ backgroundColor: '#FFFFFF' }">Modification</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-branch>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>{{ branch.name }}</td>
+              <td>Lorem Ipsum</td>
+              <td>Lorem Ipsum</td>
+              <td>
+                <span
+                  [ngClass]="{
+                    active: branch.status === 'active',
+                    inactive: branch.status === 'Inactive'
+                  }"
+                  >{{ branch.status }}</span
+                >
+              </td>
+              <td style="color: #20e600">EDIT</td>
+              <td style="color: #ff0303">DELETE</td>
+            </tr></ng-template
+          >
+        </p-table>
+      </div>
     </div>
   </div>
 </div>

@@ -20,4 +20,41 @@ import { ChartModule } from 'primeng/chart';
   templateUrl: './branch.component.html',
   styleUrl: '../dashboard-home/dashboard-home.component.css',
 })
-export class BranchComponent {}
+export class BranchComponent {
+  branchDetails: any = [
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+    {
+      name: 'Kisumu',
+      status: 'Inactive',
+    },
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+    {
+      name: 'Kisumu',
+      status: 'Inactive',
+    },
+    {
+      name: 'Kisumu',
+      status: 'active',
+    },
+  ];
+
+  class: any = 'p-datatable-sm';
+}
