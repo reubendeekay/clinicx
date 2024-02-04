@@ -6,32 +6,123 @@
   <div class="logincontent">
     <h3>REGISTER</h3>
     <p>Please create an account</p>
-    <form>
+    <form
+      [formGroup]="registerForm"
+      id="registerForm"
+      (ngSubmit)="RegisterProcess()"
+    >
       <span class="p-input-icon-left">
         <i class="pi pi-user"></i>
-        <input type="text" pInputText placeholder="UserName" />
+        <input
+          type="text"
+          pInputText
+          placeholder="UserName"
+          formControlName="email"
+        />
+        @if( registerForm?.get('email')?.invalid &&
+        registerForm?.get('email')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Email Address is Required</small
+        >}
       </span>
-            <span class="p-input-icon-left">
+      <span class="p-input-icon-left">
         <i class="pi pi-user"></i>
-        <input type="text" pInputText placeholder="Full Name" />
-      </span>
-       <span class="p-input-icon-left">
-        <i class="pi pi-envelope"></i>
-        <input type="text" pInputText placeholder="Email Address" />
-      </span>
-        <span class="p-input-icon-left">
-        <i class="pi pi-phone"></i>
-        <input type="text" pInputText placeholder="Phone Number" />
-      </span>
-      <span class="p-input-icon-left">
-        <i class="pi pi-lock"></i>
-        <input type="text" pInputText placeholder="Password" />
+        <input
+          type="text"
+          pInputText
+          placeholder="Phone Number"
+          formControlName="phone_number"
+        />
+        @if( registerForm?.get('phone_number')?.invalid &&
+        registerForm?.get('phone_number')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Phone Number is Required</small
+        >}
       </span>
       <span class="p-input-icon-left">
-        <i class="pi pi-eye"></i>
-        <input type="text" pInputText placeholder="Repeat Password" />
+        <i class="pi pi-user"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="First Name"
+          formControlName="first_name"
+        />
+        @if( registerForm?.get('first_name')?.invalid &&
+        registerForm?.get('first_name')?.dirty){
+        <small id="username-help" class="block p-error"
+          >First Name is Required</small
+        >}
       </span>
-      <button pButton>Register</button>
+      <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Last Name"
+          formControlName="last_name"
+        />
+        @if( registerForm?.get('last_name')?.invalid &&
+        registerForm?.get('last_name')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Last Name is Required</small
+        >}
+      </span>
+      <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="Gender"
+          formControlName="gender"
+        />
+        @if( registerForm?.get('gender')?.invalid &&
+        registerForm?.get('gender')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Gender is Required</small
+        >}
+      </span>
+      <span>
+        <input
+          type="text"
+          pInputText
+          placeholder="date_of_birth"
+          formControlName="date_of_birth"
+        />
+        @if( registerForm?.get('date_of_birth')?.invalid &&
+        registerForm?.get('date_of_birth')?.dirty){
+        <small id="username-help" class="block p-error"
+          >date_of_birth is Required</small
+        >}
+      </span>
+       <span>
+        <input
+          type="text"
+          pInputText
+          placeholder="marital_status"
+          formControlName="marital_status"
+        />
+        @if( registerForm?.get('marital_status')?.invalid &&
+        registerForm?.get('marital_status')?.dirty){
+        <small id="username-help" class="block p-error"
+          >marital_status is Required</small
+        >}
+      </span>
+       <span>
+        <input
+          type="text"
+          pInputText
+          placeholder="password"
+          formControlName="password"
+        />
+        @if( registerForm?.get('password')?.invalid &&
+        registerForm?.get('password')?.dirty){
+        <small id="username-help" class="block p-error"
+          >password is Required</small
+        >}
+      </span>
+     <button pButton type="submit" (click)="RegisterProcess()" [disabled]="registerForm.invalid" >
+        Register
+      </button>
     </form>
   </div>
 
@@ -43,7 +134,11 @@
         src="../../../../assets/Images/women with tab 1.png"
         alt="woman with tab"
       />
-      <img class="glassimg2" alt="lightbulb" src="../../../../assets/Images/lightbulb.png"/>
+      <img
+        class="glassimg2"
+        alt="lightbulb"
+        src="../../../../assets/Images/lightbulb.png"
+      />
     </div>
   </div>
 </div>

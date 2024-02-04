@@ -6,16 +6,33 @@
   <div class="logincontent">
     <h3>LOGIN</h3>
     <p>Please login to get started</p>
-    <form>
+    <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="LoginProcess()">
       <span class="p-input-icon-left">
         <i class="pi pi-user"></i>
-        <input type="text" pInputText placeholder="UserName" />
+        <input
+          type="text"
+          pInputText
+          placeholder="UserName"
+          formControlName="emailAddress"
+        />
+        @if( loginForm?.get('emailAddress')?.invalid &&
+        loginForm?.get('emailAddress')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Email Address is Required</small
+        >}
       </span>
       <span class="p-input-icon-left">
         <i class="pi pi-lock"></i>
-        <input type="text" pInputText placeholder="Password" />
+        <input type="text" pInputText placeholder="Password" formControlName="password"/>
+          @if( loginForm?.get('password')?.invalid &&
+        loginForm?.get('password')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Email Address is Required</small
+        >}
       </span>
-      <button pButton>Login</button>
+      <button pButton type="submit" (click)="LoginProcess()" [disabled]="loginForm.invalid" >
+        Login
+      </button>
     </form>
   </div>
 
@@ -27,7 +44,11 @@
         src="../../../../assets/Images/women with tab 1.png"
         alt="woman with tab"
       />
-      <img class="glassimg2" alt="lightbulb" src="../../../../assets/Images/lightbulb.png"/>
+      <img
+        class="glassimg2"
+        alt="lightbulb"
+        src="../../../../assets/Images/lightbulb.png"
+      />
     </div>
   </div>
 </div>

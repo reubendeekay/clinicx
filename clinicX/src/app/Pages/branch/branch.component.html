@@ -18,7 +18,7 @@
           />
         </div>
         <p-table
-          [value]="branchDetails"
+          [value]="branches"
           [tableStyle]="{ 'font-size': '12px' }"
           [styleClass]="class"
           [style]="{ 'margin-top': '30px', width: '97%' }"
@@ -28,29 +28,41 @@
               <th [style]="{ backgroundColor: '#FFFFFF' }">
                 <input type="checkbox" />
               </th>
+         
               <th pSortableColumn="code" style="width: 20%; background-color: white;">
-                Branches <p-sortIcon field="code"></p-sortIcon>
+                Name <p-sortIcon field="code"></p-sortIcon>
               </th>
               <th pSortableColumn="code" style="width: 20%; background-color: white;">
-                Something Revelant <p-sortIcon field="code"></p-sortIcon>
+              Description <p-sortIcon field="code"></p-sortIcon>
               </th>
                <th pSortableColumn="code" style="width: 20%; background-color: white;">
-                Something Revelant <p-sortIcon field="code"></p-sortIcon>
+                Address<p-sortIcon field="code"></p-sortIcon>
               </th>
                <th pSortableColumn="code" style="width: 20%; background-color: white;">
-                Service Availability <p-sortIcon field="code"></p-sortIcon>
+                Number <p-sortIcon field="code"></p-sortIcon>
                </th>
+                <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Longitude<p-sortIcon field="code"></p-sortIcon>
+              </th>
+               <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Langitude <p-sortIcon field="code"></p-sortIcon>  </th>
+               <!-- </th> <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Status <p-sortIcon field="code"></p-sortIcon>
+               </th> -->
               <th [style]="{ backgroundColor: '#FFFFFF' }">Modification</th>
               <th></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-branch>
             <tr>
-              <td><input type="checkbox" /></td>
+              <td><input type="checkbox" (change)="onCheckboxChange($event, branch)" /></td>
               <td>{{ branch.name }}</td>
-              <td>Lorem Ipsum</td>
-              <td>Lorem Ipsum</td>
-              <td>
+              <td>{{ branch.description }}</td>
+              <td>{{ branch.address }}</td>
+              <td>{{ branch.phone_number }}</td>
+              <td>{{ branch.longitude }}</td>
+              <td>{{ branch.latitude }}</td>
+              <!-- <td>
                 <span
                   [ngClass]="{
                     active: branch.status === 'active',
@@ -58,9 +70,9 @@
                   }"
                   >{{ branch.status }}</span
                 >
-              </td>
+              </td> -->
               <td style="color: #20e600">EDIT</td>
-              <td style="color: #ff0303">DELETE</td>
+              <td style="color: #ff0303; cursor: pointer;" (click)="deleteSelectedBranches()">DELETE</td>
             </tr></ng-template
           >
         </p-table>

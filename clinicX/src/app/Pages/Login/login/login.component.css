@@ -11,9 +11,7 @@
     #e0e9f4 103.35%
   );
   width: 100%;
-  position: fixed;
-  min-height: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .outter {
