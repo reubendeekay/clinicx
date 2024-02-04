@@ -1,0 +1,229 @@
+.navbar {
+    width: 85%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .navbar .logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .navbar .logo span {
+    color: var(--navy);
+    font-size: 20px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+  }
+  
+  .navbar .links span {
+    margin: 0px 8px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-family: "Baloo Da 2", sans-serif;
+    font-size: 36px;
+    width: 100%;
+    font-weight: 800;
+  }
+  .bookingForm h3 {
+    font-family: "Baloo Da 2", sans-serif;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+  }
+  .bookingForm h4 {
+    text-align: center;
+    font-weight: 800;
+  }
+  
+  .bookingForm{
+   padding: 10%;
+  }
+  
+  .bookingForm form {
+    background-color: var(--lightgrey);
+    width: 870px;
+    max-width: 470px;
+    padding: 40px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    left: 10%;
+  }
+  
+  .bookingForm input {
+    outline: 0;
+    border: 0;
+    font-family: "Baloo Da 2", sans-serif;
+    font-size: 16px;
+    background-color: var(--lightgrey);
+    padding: 15px 0;
+    border-bottom: 1px solid #e4e4e4;
+  }
+  
+  @media screen and (max-width: 980px) {
+    .navbar .logo img {
+      transform: scale(0.6);
+      transition: all 0.5s ease-in;
+    }
+  
+    .navbar .logo {
+      gap: 5px;
+    }
+  
+    .tiles {
+      flex-direction: column;
+      gap: 65px;
+    }
+  
+    .rated {
+      margin: 50px auto;
+    }
+  
+  
+    .footerinfo {
+      font-size: 13px;
+    }
+  
+    .bookingForm form {
+      width: 85%;
+      margin: 0px;
+    }
+  }
+  
+  .rated {
+    width: 85%;
+    margin: 100px auto;
+    text-align: center;
+  }
+  
+  .rated h3 {
+    font-size: 36px;
+    font-family: "Baloo Da 2", sans-serif;
+    color: var(--blue);
+  }
+  
+  .rated p {
+    color: var(--grey);
+    margin-top: 15px;
+    font-weight: 500;
+  }
+  
+  .rated p:last-of-type {
+    color: var(--purple);
+  }
+  
+  .tiles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  
+  
+  
+  
+  .landingBtn {
+    padding: 10px 20px;
+    border: 0;
+    outline: 0;
+    color: white;
+    background: var(--purple);
+    border-radius: 25px;
+    font-family: "Baloo Da 2", sans-serif;
+    margin-top: 30px;
+    font-weight: 700;
+  }
+  
+  
+  .map,
+  .footer,
+  .bookingForm {
+    width: 100%;
+    margin: 10px auto;
+    margin-top: 120px;
+    color: var(--blue);
+  }
+  
+  .footer {
+    padding: 30px 0;
+  }
+  
+  .map img {
+    width: 75%;
+    height: 50%;
+    
+  }
+  
+  
+  .footerinfo {
+    font-family: "Baloo Da 2", sans-serif;
+    font-weight: 700;
+  }
+  
+  
+  
+  .common {
+    width: 90%;
+  }
+  
+  .common,
+  .find,
+  .find div,
+  .footer,
+  .footerinfo,
+  .footerlogo,
+  .socials,
+  .bookingForm {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footerinfo,
+  .footerlogo,
+  .socials {
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .find div {
+    flex-direction: column;
+  }
+  
+  .common p,
+  .find div p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .common p:before,
+  .find div p:before {
+    display: inline-block;
+    content: "";
+    background-image: url("../../../assets/Images/leftarrow.png");
+    background-size: 20px 20px;
+    height: 20px;
+    width: 20px;
+  }
+  
+  
+  .homeContainer {
+    box-sizing: content-box;
+    background: linear-gradient(
+      180deg,
+      #d9d8ff 0%,
+      rgba(255, 187, 187, 0.838515) 16.15%,
+      rgba(255, 217, 201, 0.661424) 39.07%,
+      rgba(255, 228, 228, 0) 100%
+    );
+  }
+  
