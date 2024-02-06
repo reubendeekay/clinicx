@@ -4,6 +4,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NgToastModule } from 'ng-angular-popup';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 @Component({
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterLinkActive,
     NgToastModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
