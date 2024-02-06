@@ -44,92 +44,102 @@
   position: absolute;
   top: 20%;
   left: 25%;
+  height: 70%;
+  overflow-y: scroll;
+  padding-right: 30px;
 }
 
-.logincontent h3 , .logincontent p, input{
+.logincontent h3,
+.logincontent p,
+input {
   font-family: "Poppins", sans-serif;
   text-align: center;
 }
 
-input{
- font-size: 12px;
- padding-left: 0;
- display: block;
- width: 100%;
- background-color: transparent;
+input {
+  font-size: 12px;
+  padding-left: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
 }
 
-.logincontent form{
- width: 250px;
- display: flex;
- flex-direction: column;
- gap: 30px;
+.logincontent form {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.logincontent form button{
- background: linear-gradient(99.78deg, #9181F4 -5.85%, #5038ED 109.55%);
- width: max-content;
- margin: 0 auto;
- font-family: "Poppins", sans-serif;
- font-weight: 700;
+.logincontent form button {
+  background: linear-gradient(99.78deg, #9181f4 -5.85%, #5038ed 109.55%);
+  width: max-content;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
 
-.loginimage{
-position: absolute;
-width: 30%;
-height: 60%;
-right: 20%;
-top: 20%;
-background: linear-gradient(217.64deg, #9181F4 -5.84%, #5038ED 106.73%);
-background-image: url("../../../../assets/Images/loginstripes.png");
-
+.loginimage {
+  position: absolute;
+  width: 30%;
+  height: 60%;
+  right: 20%;
+  top: 20%;
+  background: linear-gradient(217.64deg, #9181f4 -5.84%, #5038ed 106.73%);
+  background-image: url("../../../../assets/Images/loginstripes.png");
 }
 
-.glass{
-background: linear-gradient(0deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.32)),
-linear-gradient(0deg, rgba(255, 255, 255, 0.21), rgba(255, 255, 255, 0.01));
-width: 60%;
-height: 70%;
-position: relative;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-border-radius: 46px;
-padding: 20px;
+.glass {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.32),
+      rgba(255, 255, 255, 0.32)
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.21), rgba(255, 255, 255, 0.01));
+  width: 60%;
+  height: 70%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 46px;
+  padding: 20px;
 }
 
-.glass p{
- width: 50%;
- color: white;
- font-family: "Poppins", sans-serif;
- font-weight: 700;
- font-size: 22px;
+.glass p {
+  width: 50%;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
 }
 
-
-.glassimg1{
- position: absolute;
- bottom: 0;
- right: -40px;
- height: 90%;
+.glassimg1 {
+  position: absolute;
+  bottom: 0;
+  right: -40px;
+  height: 90%;
 }
 
-.glassimg2{
- position: absolute;
- bottom: 15%;
- height: 15%;
- left: -5%;
+.glassimg2 {
+  position: absolute;
+  bottom: 15%;
+  height: 15%;
+  left: -5%;
 }
 
 @media screen and (max-width: 980px) {
-
- .loginimage{
-  display: none;
- }
+  .loginimage {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 400px){
-   .logincontent{
-  left: 15%;
- }
+@media screen and (max-width: 400px) {
+  .logincontent {
+    left: 15%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
 }
