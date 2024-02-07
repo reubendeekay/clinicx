@@ -8,6 +8,7 @@ import { PatientlistComponent } from './Pages/patientlist/patientlist.component'
 import { PatientFormComponent } from './Pages/patient-form/patient-form.component';
 import { PatientProfileComponent } from './Pages/patient-profile/patient-profile.component';
 import { BookingComponent } from './Pages/booking/booking.component';
+import { DoctormanagementComponent } from './Pages/doctormanagement/doctormanagement.component';
 import { authGuard } from '../app/Guards/auth.guard.service';
 
 export const routes: Routes = [
@@ -27,6 +28,11 @@ export const routes: Routes = [
   {
     path: 'patientmanagement',
     component: PatientlistComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'doctormanagement',
+    component: DoctormanagementComponent,
     canActivate: [authGuard],
   },
   {

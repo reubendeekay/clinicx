@@ -90,7 +90,7 @@ export class SignUpComponent {
            // Validation error
            // Handle specific validation error cases if needed
            this.toast.error({
-             detail: 'Validation Error',
+             detail: 'Error',
              summary: 'Registration validation failed.',
              duration: 5000,
            });

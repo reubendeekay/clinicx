@@ -67,3 +67,9 @@
     padding: 15px;
   }
 }
+
+
+.sidebar{
+  position: relative;
+  z-index: 1000;
+}
