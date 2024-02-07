@@ -1,0 +1,63 @@
+<div class="dashboard">
+    <div class="outter">
+      <div class="inner">
+        <app-topbar title="Doctor Management"></app-topbar>
+        <!-- router outlet will go -->
+        <div class="main-content">
+          <div class="icons" style="justify-content: end; padding-right: 30px">
+            <i class="pi pi-sort-alt"></i>
+            <i class="pi pi-sort-alt"></i>
+            <i class="pi pi-arrow-down"></i>
+          </div>
+          <p-table
+            [value]="doctorDetails"
+            [styleClass]="class"
+            [paginator]="true"
+            [rows]="8"
+            [tableStyle]="{ 'font-size': '12px' }"
+            [rowsPerPageOptions]="[10, 20, 30]"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate=" {first} to {last} of {totalRecords}"
+            [style]="{ 'margin-top': '30px', width: '97%' }"
+          >
+            <ng-template pTemplate="header" let-appointmentsHeader>
+              <tr>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">Doctor</th>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">Branch</th>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">Branch Details</th>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">Services</th>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">OTP Verification</th>
+                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                  Report Generation Status
+                </th>
+                <th [style]="{ backgroundColor: '#FFFFFF', textAlign: 'center' }">
+                  Time
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-doctor>
+              <tr>
+                <td>{{ doctor.doctorName }}</td>
+                <td>{{ doctor.branch }}</td>
+                <td>{{ doctor.branchDetails }}</td>
+                <td>{{ doctor.services }}</td>
+                <td><input type="text" pInputText placeholder="Enter OTP" /></td>
+                <td>
+                  <span
+                    [ngClass]="{
+                      complete: doctor.reportStatus === 'Complete',
+                      pending: doctor.reportStatus === 'Pending',
+                      cancelled: doctor.reportStatus === 'Cancelled'
+                    }"
+                    >{{ doctor.reportStatus }}</span
+                  >
+                </td>
+                <td style="text-align: right">{{ doctor.time }}</td>
+              </tr></ng-template
+            >
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

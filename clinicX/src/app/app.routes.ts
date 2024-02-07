@@ -10,7 +10,7 @@ import { PatientProfileComponent } from './Pages/patient-profile/patient-profile
 import { BookingComponent } from './Pages/booking/booking.component';
 import { DoctormanagementComponent } from './Pages/doctormanagement/doctormanagement.component';
 import { authGuard } from '../app/Guards/auth.guard.service';
-
+import { DoctorComponent } from './Pages/doctor/doctor.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -46,5 +46,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: 'booking', component: BookingComponent },
+  { path: 'doctor', component: DoctorComponent },
+
   // {path: '**', component: '<h1>Page not found</h1>'},
 ];
