@@ -1,0 +1,252 @@
+<div>
+    <h3 class="topbartitle mb-5">Manage Appointments</h3>
+    <button
+        pButton
+        class="mb-5 mr-10"
+        (click)="showDialog(); mode = 'add'; appointmentsForm.reset()"
+    >
+        <i class="pi pi-plus"></i>
+        Add an Appointment
+    </button>
+        <div class="icons">
+        <div
+            (click)="showDialog(); mode = 'add'; appointmentsForm.reset()"
+        >
+            <i class="pi pi-plus"></i>
+        </div>
+        <i class="pi pi-download" style="cursor: pointer"></i>
+
+        <div (click)="confirm1($event)">
+            <i class="pi pi-trash"></i>
+        </div>
+    </div>
+</div>
+
+<p-table
+    [value]="appointments"
+    [styleClass]="class"
+    [paginator]="true"
+    [rows]="8"
+    [tableStyle]="{ 'font-size': '12px' }"
+    [rowsPerPageOptions]="[10, 20, 30]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate=" {first} to {last} of {totalRecords}"
+    [style]="{ 'margin-top': '30px', width: '97%' }"
+>
+    <ng-template pTemplate="header" let-doctor>
+        <tr>
+            <th></th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">patient_id</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">doctor_id</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">service_id</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">appointment_date</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">appoinment_time</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">Reason</th>
+
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appointment>
+        <tr>
+            <td>
+                <input
+                    type="checkbox"
+                    (change)="onCheckboxChange($event, appointment)"
+                />
+            </td>
+            <td>{{ appointment.patient.first_name + appointment.patient.last_name }}</td>
+            <td>{{ appointment.doctor_id }}</td>
+            <td>{{ appointment.service.name }}</td>
+            <td>{{ appointment.appointment_date }}</td>
+            <td>{{ appointment.appointment_time }}</td>
+            <td>{{ appointment.reason }}</td>
+
+            <td
+                style="color: #20e600; cursor: pointer"
+                (click)="editAppointments(appointment)"
+            >
+                EDIT
+            </td>
+        </tr></ng-template
+    >
+          </p-table
+>
+
+<p-dialog
+    header="{{ mode === 'add' ? 'ADD AN APPOINTMENT' : 'EDIT AN APPOINTMENT' }}"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '70vw' }"
+    [draggable]="false"
+    [resizable]="true"
+    [maximizable]="true"
+    (onHide)="fetchappointments()"
+>
+    <form [formGroup]="appointmentsForm" class="m-0">
+        <div class="field">
+            <p-dropdown
+                class="block"
+                [style]="{ width: '100%' }"
+                [options]="doctors"
+                formControlName="doctor_id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Doctor Name"
+            >
+                <ng-template let-service pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ service.name }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <small
+                id="userfirst_name-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('doctor_id')?.invalid &&
+                    appointmentsForm?.get('doctor_id')?.dirty
+                "
+            >
+                Doctor Name is Required</small
+            >
+        </div>
+        <div class="field">
+            <p-dropdown
+                class="block"
+                [style]="{ width: '100%' }"
+                [options]="patients"
+                formControlName="patient_id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Patient Name"
+            >
+                <ng-template let-service pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ service.name }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <small
+                id="userfirst_name-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('patient_id')?.invalid &&
+                    appointmentsForm?.get('patient_id')?.dirty
+                "
+            >
+                Patient Name is Required</small
+            >
+        </div>
+        <div class="field">
+            <p-dropdown
+                class="block"
+                [style]="{ width: '100%' }"
+                [options]="services"
+                formControlName="service_id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Service Name"
+            >
+                <ng-template let-service pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ service.name }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <small
+                id="userfirst_name-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('service_id')?.invalid &&
+                    appointmentsForm?.get('service_id')?.dirty
+                "
+            >
+                Service Name is Required</small
+            >
+        </div>
+
+        <div class="field">
+            <input
+                type="date"
+                pInputText
+                placeholder="Patient Appointment_date"
+                formControlName="appointment_date"
+                [style]="{ width: '100%' }"
+            />
+            <small
+                id="userappointment_date-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('appointment_time')?.invalid &&
+                    appointmentsForm?.get('appointment_time')?.dirty
+                "
+            >
+                Appointment_time is Required</small
+            >
+        </div>
+        <div class="field">
+            <input
+                type="time"
+                pInputText
+                placeholder="Patient appoinment_time"
+                formControlName="appointment_time"
+                [style]="{ width: '100%' }"
+            />
+            <small
+                id="userappointment_date-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('appointment_time').invalid &&
+                    appointmentsForm?.get('appointment_time')?.dirty
+                "
+            >
+                Appointment_time is Required</small
+            >
+        </div>
+        
+        <div class="field">
+            <input
+                type="text"
+                pInputText
+                placeholder="reason"
+                formControlName="reason"
+                [style]="{ width: '100%' }"
+            />
+            <small
+                id="userappointment_date-help"
+                class="block p-error"
+                *ngIf="
+                    appointmentsForm?.get('reason')?.invalid &&
+                    appointmentsForm?.get('reason')?.dirty
+                "
+            >
+                Reason is Required</small
+            >
+        </div>
+        @if(mode === 'add'){
+        <button
+            pButton
+            label="Submit"
+            type="submit"
+            [disabled]="appointmentsForm.invalid"
+            (click)="addappointments()"
+        ></button>
+        } @if(mode === 'edit'){
+        <button
+            pButton
+            label="Update"
+            (click)="updateAppointments()"
+            type="submit"
+            [disabled]="appointmentsForm.invalid"
+        ></button>
+        }
+    </form>
+</p-dialog>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

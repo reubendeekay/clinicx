@@ -1,0 +1,270 @@
+<div>
+    <h3 class="topbartitle mb-5">Manage Branches</h3>
+    <button
+        pButton
+        class="mb-5 mr-10"
+        (click)="showDialog(); mode = 'add'; branchForm.reset()"
+    >
+        <i class="pi pi-plus"></i>
+        Add a Branch
+    </button>
+</div>
+
+<div class="dashboard">
+  <div class="outter">
+    <div class="inner">
+      <!-- router outlet will go -->
+      <div class="main-content">
+        <div class="maps">
+          <img
+            src="../../../../assets/demo/images/PREVIOUS/kenyanmap.png"
+            height="120px"
+            alt="map of kenya"
+            style="margin-right: 20px"
+          />
+          <img
+            src="../../../../assets/demo/images/PREVIOUS/branchcounties.png"
+            height="120px"
+            alt="branches in kenya"
+          />
+        </div>
+
+        <p-table
+          [value]="branches"
+          [tableStyle]="{ 'font-size': '12px' }"
+          [styleClass]="class"
+          [style]="{ 'margin-top': '30px', width: '97%' }"
+        >
+          <ng-template pTemplate="header" let-appointmentsHeader>
+            <tr>
+              <th [style]="{ backgroundColor: '#FFFFFF' }">
+                <input type="checkbox" />
+              </th>
+
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Name <p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Description <p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Address<p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Number <p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Longitude<p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <th
+                pSortableColumn="code"
+                style="width: 20%; background-color: white"
+              >
+                Langitude <p-sortIcon field="code"></p-sortIcon>
+              </th>
+              <!-- </th> <th pSortableColumn="code" style="width: 20%; background-color: white;">
+                Status <p-sortIcon field="code"></p-sortIcon>
+               </th> -->
+              <th [style]="{ backgroundColor: '#FFFFFF' }">Modification</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-branch>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  (change)="onCheckboxChange($event, branch)"
+                />
+              </td>
+              <td>{{ branch.name }}</td>
+              <td>{{ branch.description }}</td>
+              <td>{{ branch.address }}</td>
+              <td>{{ branch.phone_number }}</td>
+              <td>{{ branch.longitude }}</td>
+              <td>{{ branch.latitude }}</td>
+              <!-- <td>
+                <span
+                  [ngClass]="{
+                    active: branch.status === 'active',
+                    inactive: branch.status === 'Inactive'
+                  }"
+                  >{{ branch.status }}</span
+                >
+              </td> -->
+              <td
+                style="color: #20e600; cursor: pointer"
+                (click)="editBranch(branch)"
+              >
+                EDIT
+              </td>
+              <td
+                style="color: #ff0303; cursor: pointer"
+                (click)="confirm1($event)"
+              >
+                DELETE
+              </td>
+            </tr></ng-template
+          >
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog
+    header="{{ mode === 'add' ? 'ADD A BRANCH' : 'EDIT A BRANCH' }}"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '70vw' }"
+    [draggable]="false"
+    [resizable]="true"
+    [maximizable]="true"
+    (onHide)="fetchbranches()"
+  >
+    <form [formGroup]="branchForm" class="m-0">
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="Branch Name"
+          formControlName="name"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('name')?.invalid && branchForm?.get('name')?.dirty
+          "
+          >Branch Name is Required</small
+        >
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="Description"
+          formControlName="description"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('description')?.invalid &&
+            branchForm?.get('description')?.dirty
+          "
+          >Description is Required</small
+        >
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="Address"
+          formControlName="address"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('address')?.invalid &&
+            branchForm?.get('address')?.dirty
+          "
+          >Address is Required</small
+        >
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="PhoneNumber"
+          formControlName="phone_number"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('phone_number')?.invalid &&
+            branchForm?.get('phone_number')?.dirty
+          "
+          >PhoneNumber is Required</small
+        >
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="Longitude"
+          formControlName="longitude"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('longitude')?.invalid &&
+            branchForm?.get('longitude')?.dirty
+          "
+          >Longitude is Required</small
+        >
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          pInputText
+          placeholder="Latitude"
+          formControlName="latitude"
+          [style]="{ width: '100%' }"
+        />
+        <small
+          id="username-help"
+          class="block p-error"
+          *ngIf="
+            branchForm?.get('latitude')?.invalid &&
+            branchForm?.get('latitude')?.dirty
+          "
+          >Latitude is Required</small
+        >
+      </div>
+
+      @if(mode === 'add'){
+      <button
+        pButton
+        label="Submit"
+        type="submit"
+        [disabled]="branchForm.invalid"
+        (click)="addbranch()"
+      ></button>
+      } @if(mode === 'edit'){
+      <button
+        pButton
+        label="Update"
+        (click)="updateBranch()"
+        type="submit"
+        [disabled]="branchForm.invalid"
+      ></button>
+      }
+    </form>
+  </p-dialog>
+  <p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+</div>

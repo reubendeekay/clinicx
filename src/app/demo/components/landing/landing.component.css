@@ -1,0 +1,329 @@
+.navbar {
+    width: 85%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.navbar .logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.navbar .logo span {
+    color: var(--navy);
+    font-size: 20px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+}
+
+.navbar .links span {
+    margin: 0px 8px;
+}
+
+.medicalform h2 {
+    font-family: "Baloo Da 2", sans-serif;
+    font-size: 46px;
+    font-weight: 800;
+}
+
+.medicalform form {
+    background-color: var(--lightgrey);
+    width: 470px;
+    max-width: 470px;
+    padding: 40px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.medicalform input {
+    outline: 0;
+    border: 0;
+    font-family: "Baloo Da 2", sans-serif;
+    font-size: 16px;
+    background-color: var(--lightgrey);
+    padding: 15px 0;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+@media screen and (max-width: 980px) {
+    .navbar .logo img {
+        transform: scale(0.6);
+        transition: all 0.5s ease-in;
+    }
+
+    .navbar .logo {
+        gap: 5px;
+    }
+
+    .tiles {
+        flex-direction: column;
+        gap: 65px;
+    }
+
+    .rated {
+        margin: 50px auto;
+    }
+
+    .specialties,
+    .footer,
+    .medicalform {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .specialties h3 {
+        text-align: center;
+    }
+
+    .specialties .types {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .private,
+    .jobs {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .private div {
+        margin-top: -40px;
+    }
+
+    .partner div {
+        display: flex;
+        flex-direction: column;
+    }
+    .moreinfo {
+        width: 100%;
+        margin: 0px auto !important;
+        padding: 10px !important;
+    }
+
+    .moreinfo .find div p,
+    .common p {
+        font-size: 12px;
+    }
+
+    .footerinfo {
+        font-size: 13px;
+    }
+
+    .medicalform form {
+        width: 85%;
+        margin: 0px;
+    }
+}
+
+.rated {
+    width: 85%;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.rated h3 {
+    font-size: 36px;
+    font-family: "Baloo Da 2", sans-serif;
+    color: var(--blue);
+}
+
+.rated p {
+    color: var(--grey);
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.rated p:last-of-type {
+    color: var(--purple);
+}
+
+.tiles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.specialties {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: max-content;
+}
+
+.specialties h3 {
+    font-size: 36px;
+    color: var(--blue);
+    font-weight: 800;
+}
+
+.specialties .types {
+    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 12rem));
+}
+
+.specialties .types div {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    border-radius: 25px;
+    background-color: var(--lightgrey);
+}
+
+.specialties .types div span {
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.specialties .types div img {
+    margin: 0 auto;
+}
+
+.landingBtn {
+    padding: 10px 20px;
+    border: 0;
+    outline: 0;
+    color: white;
+    background: var(--purple);
+    border-radius: 25px;
+    font-family: "Baloo Da 2", sans-serif;
+    margin-top: 30px;
+    font-weight: 700;
+}
+
+.medicalform {
+    width: 85%;
+    margin: 30px auto;
+    color: var(--blue);
+    margin-top: 120px;
+}
+
+.private,
+.partner,
+.moreinfo,
+.jobs,
+.map,
+.footer {
+    width: 95%;
+    margin: 30px auto;
+    margin-top: 120px;
+    color: var(--blue);
+}
+
+.footer {
+    padding: 30px 0;
+}
+
+.map img {
+    width: 100%;
+}
+
+.private,
+.jobs {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+.partner,
+.moreinfo {
+    text-align: center;
+}
+
+.partner div img {
+    margin: 10px 20px;
+}
+
+.private div p,
+.partner p,
+.moreinfo p,
+.jobs div p,
+.footerinfo {
+    font-family: "Baloo Da 2", sans-serif;
+    font-weight: 700;
+}
+
+.private div h3,
+.partner h3,
+.jobs div h3 {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.private div ul {
+    padding-left: 15px;
+}
+
+.common {
+    width: 90%;
+}
+
+.common,
+.find,
+.find div,
+.footer,
+.footerinfo,
+.footerlogo,
+.socials,
+.medicalform {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerinfo,
+.footerlogo,
+.socials {
+    align-items: center;
+    gap: 20px;
+}
+
+.find div {
+    flex-direction: column;
+}
+
+.common p,
+.find div p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.common p:before,
+.find div p:before {
+    display: inline-block;
+    content: "";
+    background-image: url("/CLINICX/src/assets/demo/images/PREVIOUS/leftarrow.png");
+    background-size: 20px 20px;
+    height: 20px;
+    width: 20px;
+}
+
+.moreinfo {
+    background-color: var(--lightgrey);
+    padding: 20px 40px;
+    border-radius: 25px;
+}
+
+.homeContainer {
+    box-sizing: content-box;
+    background: linear-gradient(
+        180deg,
+        #d9d8ff 0%,
+        rgba(255, 187, 187, 0.838515) 16.15%,
+        rgba(255, 217, 201, 0.661424) 39.07%,
+        rgba(255, 228, 228, 0) 100%
+    );
+}

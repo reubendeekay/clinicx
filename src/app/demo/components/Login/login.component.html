@@ -1,0 +1,54 @@
+  <div class="loginContainer">
+  <div class="outter">
+    <div class="inner"></div>
+  </div>
+
+  <div class="logincontent">
+    <h3>LOGIN</h3>
+    <p>Please login to get started</p>
+    <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="LoginProcess()">
+      <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input
+          type="text"
+          pInputText
+          placeholder="UserName"
+          formControlName="emailAddress"
+        />
+        <!-- @if( loginForm?.get('emailAddress')?.invalid &&
+        loginForm?.get('emailAddress')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Email Address is Required</small
+        >} -->
+      </span>
+      <span class="p-input-icon-left">
+        <i class="pi pi-lock"></i>
+        <input type="text" pInputText placeholder="Password" formControlName="password"/>
+          <!-- @if( loginForm?.get('password')?.invalid &&
+        loginForm?.get('password')?.dirty){
+        <small id="username-help" class="block p-error"
+          >Email Address is Required</small
+        >} -->
+      </span>
+      <button pButton type="submit" (click)="LoginProcess()" [disabled]="loginForm.invalid" >
+        Login
+      </button>
+    </form>
+  </div>
+
+  <div class="loginimage">
+    <div class="glass">
+      <p>ClinicX, the best medical service for you!</p>
+      <img
+        class="glassimg1"
+        src="../../../../assets/demo/images/PREVIOUS/women with tab 1.png"
+        alt="woman with tab"
+      />
+      <img
+        class="glassimg2"
+        alt="lightbulb"
+        src="../../../../assets/demo/images/PREVIOUS/lightbulb.png"
+      />
+    </div>
+  </div>
+</div>

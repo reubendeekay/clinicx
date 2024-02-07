@@ -1,0 +1,197 @@
+<div>
+    <h3 class="topbartitle mb-5">Manage Doctors</h3>
+    <div class="flex gap-2">
+         <button pButton (click)="confirm1($event)">Download as CSV</button>
+         <button pButton class="outlined" (click)="showtableDialog()">See a Doctor's appointment</button>
+    </div>
+    <div class="icons">
+        <div (click)="showDialog(); mode = 'add'; doctormanagementForm.reset()">
+            <i class="pi pi-plus"></i>
+        </div>
+
+        <i class="pi pi-download" style="cursor: pointer"></i>
+
+        <div (click)="confirm1($event)">
+            <i class="pi pi-trash"></i>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="outter">
+        <div class="inner">
+            <div class="main-content">
+                <p-table
+                    [value]="doctormanagement"
+                    [styleClass]="class"
+                    [paginator]="true"
+                    [rows]="8"
+                    [tableStyle]="{ 'font-size': '12px' }"
+                    [rowsPerPageOptions]="[10, 20, 30]"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate=" {first} to {last} of {totalRecords}"
+                    [style]="{ 'margin-top': '30px', width: '97%' }"
+                >
+                    <ng-template pTemplate="header" let-doctor>
+                        <tr>
+                            <th></th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                First Name
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Last Name
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Email
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Phone Number
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Role
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                MaritalStatus
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Branch Name
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-doctor>
+                        <tr>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    (change)="onCheckboxChange($event, doctor)"
+                                />
+                            </td>
+                            <td>{{ doctor.user.first_name }}</td>
+                            <td>{{ doctor.user.last_name }}</td>
+                            <td>{{ doctor.user.email }}</td>
+                            <td>{{ doctor.user.phone_number }}</td>
+                            <td>{{ doctor.user.role }}</td>
+                            <td>{{ doctor.user.marital_status }}</td>
+                            <td>{{ doctor.branch.name }}</td>
+                            <td
+                                style="color: #20e600; cursor: pointer"
+                                (click)="editDoctormanagement(doctor)"
+                            >
+                                EDIT
+                            </td>
+                        </tr></ng-template
+                    >
+                </p-table>
+                <p-dialog
+                    header="{{
+                        mode === 'add' ? 'ADD A DOCTOR' : 'EDIT A DOCTOR'
+                    }}"
+                    [(visible)]="visible"
+                    [modal]="true"
+                    [style]="{ width: '70vw', height: '300px' }"
+                    [draggable]="false"
+                    [resizable]="true"
+                    [maximizable]="true"
+                    (onHide)="fetchdoctormanagement()"
+                >
+                    <form [formGroup]="doctormanagementForm" class="m-0">
+                        <div class="field">
+                            <p-dropdown
+                                class="block"
+                                [style]="{ width: '100%' }"
+                                [options]="branches"
+                                formControlName="branch_id"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Doctor Branch"
+                            >
+                                <ng-template let-service pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ service.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                            <small
+                                id="userfirst_name-help"
+                                class="block p-error"
+                                *ngIf="
+                                    doctormanagementForm?.get('branch_id')
+                                        ?.invalid &&
+                                    doctormanagementForm?.get('branch_id')
+                                        ?.dirty
+                                "
+                            >
+                                Branch Name is Required</small
+                            >
+                        </div>
+                        @if(mode === 'add'){
+                        <div class="field">
+                            <p-dropdown
+                                class="block"
+                                [style]="{ width: '100%' }"
+                                [options]="users"
+                                formControlName="user_id"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Doctor Phone Number"
+                            >
+                                <ng-template let-service pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ service.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                            <small
+                                id="userfirst_name-help"
+                                class="block p-error"
+                                *ngIf="
+                                    doctormanagementForm?.get('user_id')
+                                        ?.invalid &&
+                                    doctormanagementForm?.get('user_id')?.dirty
+                                "
+                            >
+                                User Name is Required</small
+                            >
+                        </div>
+                        } @if(mode === 'add'){
+                        <button
+                            pButton
+                            label="Submit"
+                            type="submit"
+                            [disabled]="doctormanagementForm.invalid"
+                            (click)="adddoctormanagement()"
+                        ></button>
+                        } @if(mode === 'edit'){
+                        <button
+                            pButton
+                            label="Update"
+                            (click)="updateDoctormanagement()"
+                            type="submit"
+                            [disabled]="doctormanagementForm.invalid"
+                        ></button>
+                        }
+                    </form>
+                </p-dialog>
+                 <p-dialog
+                    header="APPOINTMENTS FOR {{selecteddoctormanagement[0]}}"
+                    [(visible)]="tablevisible"
+                    [modal]="true"
+                    [style]="{ width: '70vw', height: '300px' }"
+                    [draggable]="false"
+                    [resizable]="true"
+                    [maximizable]="true"
+                    (onHide)="fetchdoctormanagement()"
+                >
+                  
+                </p-dialog>
+            </div>
+        </div>
+    </div>
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+</div>

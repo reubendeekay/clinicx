@@ -1,0 +1,370 @@
+<div>
+    <h3 class="topbartitle mb-5">Manage Patients</h3>
+    <button pButton (click)="confirm1($event)">Download as CSV</button>
+    <div class="icons">
+        <div
+            (click)="showDialog(); mode = 'add'; patientmanagementForm.reset()"
+        >
+            <i class="pi pi-plus"></i>
+        </div>
+        <i class="pi pi-download" style="cursor: pointer"></i>
+
+        <div (click)="confirm1($event)">
+            <i class="pi pi-trash"></i>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="outter">
+        <div class="inner">
+            <div class="main-content">
+                <p-table
+                    [value]="patientmanagement"
+                    [styleClass]="class"
+                    [paginator]="true"
+                    [rows]="8"
+                    [tableStyle]="{ 'font-size': '12px' }"
+                    [rowsPerPageOptions]="[10, 20, 30]"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate=" {first} to {last} of {totalRecords}"
+                    [style]="{ 'margin-top': '30px', width: '97%' }"
+                >
+                    <ng-template pTemplate="header" let-patient>
+                        <tr>
+                            <th></th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                First Name
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Last Name
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Email
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Phone Number
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Address
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                MaritalStatus
+                            </th>
+                            <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                Blood Group
+                            </th>
+                            <th
+                                [style]="{
+                                    backgroundColor: '#FFFFFF',
+                                    textAlign: 'center'
+                                }"
+                            >
+                                Date of Birth
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-patient>
+                        <tr>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    (change)="onCheckboxChange($event, patient)"
+                                />
+                            </td>
+                            <td>{{ patient.first_name }}</td>
+                            <td>{{ patient.last_name }}</td>
+                            <td>{{ patient.email }}</td>
+                            <td>{{ patient.phone_number }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.marital_status }}</td>
+                            <td>{{ patient.blood_group }}</td>
+                            <td>{{ patient.date_of_birth }}</td>
+                            <td
+                                style="color: #20e600; cursor: pointer"
+                                (click)="editPatientmanagement(patient)"
+                            >
+                                EDIT
+                            </td>
+                        </tr></ng-template
+                    >
+                </p-table>
+                <p-dialog
+                    header="{{
+                        mode === 'add' ? 'ADD A BRANCH' : 'EDIT A BRANCH'
+                    }}"
+                    [(visible)]="visible"
+                    [modal]="true"
+                    [style]="{ width: '70vw' }"
+                    [draggable]="false"
+                    [resizable]="true"
+                    [maximizable]="true"
+                    (onHide)="fetchpatientmanagement()"
+                >
+                    <form [formGroup]="patientmanagementForm" class="m-0">
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient First First_name"
+                                formControlName="first_name"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="userfirst_name-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('first_name')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('first_name')
+                                        ?.dirty
+                                "
+                            >
+                                First_name is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient Last_name"
+                                formControlName="last_name"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="userlast_name-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('last_name')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('last_name')
+                                        ?.dirty
+                                "
+                            >
+                                Last_name is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient  About"
+                                formControlName="about"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="userabout-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('about')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('about')?.dirty
+                                "
+                            >
+                                About is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient  Email"
+                                formControlName="email"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="useremail-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('email')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('email')?.dirty
+                                "
+                            >
+                                Email is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient  Phone_number"
+                                formControlName="phone_number"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="userphone_number-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('phone_number')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('phone_number')
+                                        ?.dirty
+                                "
+                            >
+                                Phone_number is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="text"
+                                pInputText
+                                placeholder="Patient  Address"
+                                formControlName="address"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="useraddress-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('address')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('address')?.dirty
+                                "
+                            >
+                                Address is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <p-dropdown
+                                class="block"
+                                [style]="{ width: '100%' }"
+                                [options]="maritalOptions"
+                                formControlName="isActive"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Patient  Marital_status"
+                                formControlName="marital_status"
+                            >
+                                <ng-template let-service pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ service.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                            <small
+                                id="marital_status-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('marital_status')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('marital_status')
+                                        ?.dirty
+                                "
+                            >
+                                Marital_status is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <p-dropdown
+                                class="block"
+                                [style]="{ width: '100%' }"
+                                [options]="genderOptions"
+                                formControlName="isActive"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Patient  Gender"
+                                formControlName="gender"
+                            >
+                                <ng-template let-service pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ service.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                            <small
+                                id="usergender-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('gender')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('gender')?.dirty
+                                "
+                            >
+                                Gender is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <p-dropdown
+                                class="block"
+                                [style]="{ width: '100%' }"
+                                [options]="bloodOptions"
+                                formControlName="isActive"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Patient Blood Group"
+                                formControlName="blood_group"
+                            >
+                                <ng-template let-service pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ service.name }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                            <small
+                                id="userblood_group-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('blood_group')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('blood_group')
+                                        ?.dirty
+                                "
+                            >
+                                Blood_group is Required</small
+                            >
+                        </div>
+                        <div class="field">
+                            <input
+                                type="date"
+                                pInputText
+                                placeholder="Patient Date_of_birth"
+                                formControlName="date_of_birth"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                id="userdate_of_birth-help"
+                                class="block p-error"
+                                *ngIf="
+                                    patientmanagementForm?.get('date_of_birth')
+                                        ?.invalid &&
+                                    patientmanagementForm?.get('date_of_birth')
+                                        ?.dirty
+                                "
+                            >
+                                Date_of_birth is Required</small
+                            >
+                        </div>
+
+                        @if(mode === 'add'){
+                        <button
+                            pButton
+                            label="Submit"
+                            type="submit"
+                            [disabled]="patientmanagementForm.invalid"
+                            (click)="addpatientmanagement()"
+                        ></button>
+                        } @if(mode === 'edit'){
+                        <button
+                            pButton
+                            label="Update"
+                            (click)="updatePatientmanagement()"
+                            type="submit"
+                            [disabled]="patientmanagementForm.invalid"
+                        ></button>
+                        }
+                    </form>
+                </p-dialog>
+            </div>
+        </div>
+    </div>
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+</div>

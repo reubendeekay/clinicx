@@ -1,0 +1,27 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="./../../assets/demo/images/PREVIOUS/logo.png" alt="logo">
+        <span>CLINICX</span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <span class="flex align-items-center">halimaali.ha2002&#64;gmail.com</span>
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-user"></i>
+            <span>halimaali.ha2002&#64;gmail.com</span>
+        </button>
+       
+        <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+            <i class="pi pi-sign-out"></i>
+            <span>Log Out</span>
+        </button>
+    </div>
+</div>

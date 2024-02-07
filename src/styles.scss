@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+
+$gutter: 1rem; //for primeflex grid system
+@import "assets/layout/styles/layout/layout.scss";
+
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+
+/* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+:root {
+ --navy: #271e4a;
+ --blue: #12175e;
+ --grey: rgb(101, 103, 123);
+ --purple: #5b67ca;
+ --teal: #05b4fe;
+ --gold: #ffb800;
+ --subtitle: #00000066;
+ --lightgrey: #f6f6f6;
+}
+
+* {
+ font-family: "Yantramanav", sans-serif;
+}
+
+
+a {
+ text-decoration: none;
+ color: inherit;
+}
+
+.card {
+ padding: 30px;
+ background-color: #ffffff;
+ box-shadow: 0px 4px 15px 0px #d8d2fca3;
+ border-radius: 47px;
+}
+
+.card h3 {
+ font-family: Kanit;
+ font-weight: 500;
+ font-size: 20px;
+ text-align: left;
+ color: var(--blue);
+}
+
+::-webkit-scrollbar-track {
+ -webkit-box-shadow: inset 0 0 6px #f5f5f5;
+ background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+ width: 8px;
+ background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+ background-color: rgba(101, 103, 123, 0.2);
+ border: 2px solid var(--lightgrey);
+}
+
+.layout-wrapper {
+ background: radial-gradient(43.3% 107.22% at 51.09% 40.44%,
+    rgba(239, 242, 246, 0.4) 0%,
+    rgb(246, 227, 235, 0.4) 47.58%,
+    rgb(213, 222, 237, 0.4) 93.12%);
+}
+
+// .layout-sidebar{
+//  background-color: ;
+// }
+
+
+.topbartitle {
+    font-family: "Kanit", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navy);
+}
