@@ -40,10 +40,44 @@ export class BranchComponent {
     showDialog() {
         this.visible = true;
     }
+    tablevisible: any = false;
+
+    showtableDialog() {
+        if (this.selectedbranch.length !== 0) {
+            this.tablevisible = true;
+        } else {
+            this.messageService.add({
+                severity: 'info',
+                summary: 'Notification',
+                detail: 'Please Select a Branch',
+            });
+        }
+    }
+    appointments: any = [];
+
+    fetchappointments() {
+        this.apiservice
+            .fetchAppointmentsPatient(this.selectedbranch[0])
+            .subscribe(
+                (response: any) => {
+                    // Handle the API response
+                    console.log('API response:', response);
+
+                    this.appointments = response;
+                    // this.appointmentsForm.controls['code'].setValue(this.appointments.length + 1);
+                },
+                (error) => {
+                    // Handle the API error
+                    console.error('API error:', error.detail);
+                }
+            );
+    }
+    selecteddoctorname: any = [];
 
     ngOnInit() {
         this.fetchbranches();
         this.selectedbranch = [];
+        this.selecteddoctorname = [];
     }
 
     fetchbranches() {
@@ -62,18 +96,26 @@ export class BranchComponent {
         );
     }
 
-    deleteSelectedBranches() {
-    }
+    deleteSelectedBranches() {}
 
     class: any = 'p-datatable-sm';
 
     onCheckboxChange(event: any, branch: any) {
         console.log(branch.id);
+        this.fetchappointments()
 
-     if (event.target.checked) {
+        if (event.target.checked) {
             this.selectedbranch = [];
-         
+
             this.selectedbranch.push(branch.id);
+            this.selecteddoctorname = [];
+
+            this.selectedbranch.push(this.branches.id);
+            this.branches.filter((item) => {
+                if (this.selectedbranch[0] === item.id) {
+                    return this.selecteddoctorname.push(item.name);
+                }
+            });
         } else {
             this.selectedbranch = [];
         }
@@ -140,7 +182,7 @@ export class BranchComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: 'Error',
+                        summary: error.error.detail,
                         detail: 'Branch Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -227,7 +269,7 @@ export class BranchComponent {
                         console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: 'Error',
+                            summary: error.error.detail,
                             detail: 'Branch Update Failed. Try again Later!',
                         });
                         setTimeout(() => {
@@ -255,23 +297,21 @@ export class BranchComponent {
             rejectButtonStyleClass: 'p-button-text',
             accept: () => {
                 if (this.selectedbranch.length !== 0) {
-                    this.apiservice
-                        .deleteBranch(this.selectedbranch)
-                        .subscribe(
-                            (response: any) => {
-                                // Handle the API response
-                                console.log('API response:', response);
+                    this.apiservice.deleteBranch(this.selectedbranch).subscribe(
+                        (response: any) => {
+                            // Handle the API response
+                            console.log('API response:', response);
 
-                                // Refresh the servicees after deletion
-                                this.fetchbranches();
-                            },
-                            (error) => {
-                                // Handle the API error
-                                console.error('API error:', error);
-                            }
-                        );
+                            // Refresh the servicees after deletion
+                            this.fetchbranches();
+                        },
+                        (error) => {
+                            // Handle the API error
+                            console.error('API error:', error);
+                        }
+                    );
                     this.messageService.add({
-                        severity: 'info',
+                        severity: 'success',
                         summary: 'Confirmed',
                         detail: 'You have successfully deleted the branch',
                     });

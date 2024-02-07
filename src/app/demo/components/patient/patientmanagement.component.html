@@ -1,6 +1,11 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Patients</h3>
-    <button pButton (click)="confirm1($event)">Download as CSV</button>
+       <div class="flex gap-2">
+        <button pButton (click)="confirm1($event)">Download as CSV</button>
+        <button pButton class="outlined" (click)="showtableDialog()">
+            See a Patient's appointment
+        </button>
+    </div>
     <div class="icons">
         <div
             (click)="showDialog(); mode = 'add'; patientmanagementForm.reset()"
@@ -8,7 +13,7 @@
             <i class="pi pi-plus"></i>
         </div>
         <i class="pi pi-download" style="cursor: pointer"></i>
-
+c
         <div (click)="confirm1($event)">
             <i class="pi pi-trash"></i>
         </div>
@@ -361,6 +366,70 @@
                         ></button>
                         }
                     </form>
+                </p-dialog>
+                 <p-dialog
+                    header="APPOINTMENTS FOR {{ selecteddoctorname[0] }}"
+                    [(visible)]="tablevisible"
+                    [modal]="true"
+                    [style]="{ width: '70vw', height: '300px' }"
+                    [draggable]="false"
+                    [resizable]="true"
+                    [maximizable]="true"
+                    (onHide)="fetchpatientmanagement()"
+                >
+                    <p-table
+                        [value]="appointments"
+                        [styleClass]="class"
+                        [paginator]="true"
+                        [rows]="8"
+                        [tableStyle]="{ 'font-size': '12px' }"
+                        [rowsPerPageOptions]="[10, 20, 30]"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate=" {first} to {last} of {totalRecords}"
+                        [style]="{ 'margin-top': '30px', width: '97%' }"
+                    >
+                        <ng-template pTemplate="header" let-doctor>
+                            <tr>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    patient_id
+                                </th>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    doctor_id
+                                </th>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    service_id
+                                </th>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    appointment_date
+                                </th>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    appoinment_time
+                                </th>
+                                <th [style]="{ backgroundColor: '#FFFFFF' }">
+                                    Reason
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-appointment>
+                            <tr>
+                                <td>
+                                    {{
+                                        appointment.patient.first_name +
+                                            appointment.patient.last_name
+                                    }}
+                                </td>
+                                <td>{{ appointment.doctor_id }}</td>
+                                <td>{{ appointment.service.name }}</td>
+                                <td>{{ appointment.appointment_date }}</td>
+                                <td>{{ appointment.appointment_time }}</td>
+                                <td>{{ appointment.reason }}</td>
+
+                            </tr></ng-template
+                        >
+                              </p-table
+                    >
                 </p-dialog>
             </div>
         </div>

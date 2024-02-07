@@ -130,7 +130,7 @@ export class ServicesComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: 'Error',
+                        summary: error.error.detail,
                         detail: 'Service Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -218,7 +218,7 @@ export class ServicesComponent {
                         console.error('API error:', error);
                        this.messageService.add({
                            severity: 'error',
-                           summary: 'Error',
+                           summary: error.error.detail,
                            detail: 'Service Update Failed. Try again Later!',
                        });
                         setTimeout(() => {
@@ -262,7 +262,7 @@ export class ServicesComponent {
                             }
                         );
                     this.messageService.add({
-                        severity: 'info',
+                        severity: 'success',
                         summary: 'Confirmed',
                         detail: 'You have successfully deleted the service',
                     });

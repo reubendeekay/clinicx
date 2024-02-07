@@ -43,11 +43,40 @@ export class DoctormanagementComponent {
     }
 
     showtableDialog() {
-        this.tablevisible = true;
+        if (this.selecteddoctormanagement.length !== 0) {
+            this.tablevisible = true;
+        } else {
+             this.messageService.add({
+                 severity: 'info',
+                 summary: 'Notification',
+                 detail: 'Please Select a Doctor',
+             });
+        }
+    }
+
+    appointments: any = [];
+
+    fetchappointments() {
+        this.apiservice
+            .fetchAppointmentsPatient(this.selecteddoctormanagement[0])
+            .subscribe(
+                (response: any) => {
+                    // Handle the API response
+                    console.log('API response:', response);
+
+                    this.appointments = response;
+                    // this.appointmentsForm.controls['code'].setValue(this.appointments.length + 1);
+                },
+                (error) => {
+                    // Handle the API error
+                    console.error('API error:', error.detail);
+                }
+            );
     }
 
     ngOnInit() {
         this.fetchdoctormanagement();
+        this.selecteddoctorname = [];
         this.selecteddoctormanagement = [];
         this.fetchUsers();
         this.fetchbranches();
@@ -105,20 +134,25 @@ export class DoctormanagementComponent {
     }
 
     class: any = 'p-datatable-sm';
+    selecteddoctorname: any = [];
 
     onCheckboxChange(event: any, doctormanagement: any) {
         console.log(doctormanagement.id);
 
         if (event.target.checked) {
             this.selecteddoctormanagement = [];
+            this.selecteddoctorname = [];
 
             this.selecteddoctormanagement.push(doctormanagement.id);
-            const selecteddoctorname = doctormanagement.filter((item) => {
-                if (this.selecteddoctormanagement[0] === item) {
-                    return item.user.first_name + item.this.user.last_name;
+            this.doctormanagement.filter((item) => {
+                if (this.selecteddoctormanagement[0] === item.id) {
+                    return this.selecteddoctorname.push(item.user.first_name);
                 }
             });
+            console.log(this.selecteddoctorname);
+            this.fetchappointments();
         } else {
+            this.selecteddoctorname = [];
             this.selecteddoctormanagement = [];
         }
         console.log(this.selecteddoctormanagement);
@@ -140,7 +174,7 @@ export class DoctormanagementComponent {
                 ) {
                     return item.id;
                 }
-            });
+            })[0].id;
             const userId = this.allUsers.filter((item) => {
                 if (
                     item.phone_number ==
@@ -188,7 +222,7 @@ export class DoctormanagementComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: 'Error',
+                        summary: error.error.detail,
                         detail: 'Doctor Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -266,7 +300,7 @@ export class DoctormanagementComponent {
                             this.messageService.add({
                                 severity: 'error',
                                 summary: 'Error',
-                                detail: 'Doctormanagement Update Failed. Try again Later!',
+                                detail: 'Doctor management Update Failed. Try again Later!',
                             });
 
                             setTimeout(() => {
@@ -279,8 +313,8 @@ export class DoctormanagementComponent {
                         console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: 'Error',
-                            detail: 'Doctormanagement Update Failed. Try again Later!',
+                            summary: error.error.detail,
+                            detail: 'Doctor management Update Failed. Try again Later!',
                         });
                         setTimeout(() => {
                             this.visible = false;

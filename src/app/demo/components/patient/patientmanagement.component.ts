@@ -36,14 +36,49 @@ export class PatientmanagementComponent {
     selectedPatientmanagement: any;
 
     visible: boolean = false;
+    tablevisible: boolean = false;
 
     showDialog() {
         this.visible = true;
     }
 
+    showtableDialog() {
+        if (this.selectedpatientmanagement.length !== 0) {
+            this.tablevisible = true;
+        } else {
+            this.messageService.add({
+                severity: 'info',
+                summary: 'Notification',
+                detail: 'Please Select a Doctor',
+            });
+        }
+    }
+
+    appointments: any = [];
+
+    fetchappointments() {
+        this.apiservice
+            .fetchAppointmentsPatient(this.selectedpatientmanagement[0])
+            .subscribe(
+                (response: any) => {
+                    // Handle the API response
+                    console.log('API response:', response);
+
+                    this.appointments = response;
+                    // this.appointmentsForm.controls['code'].setValue(this.appointments.length + 1);
+                },
+                (error) => {
+                    // Handle the API error
+                    console.error('API error:', error.detail);
+                }
+            );
+    }
+    selecteddoctorname: any = [];
+
     ngOnInit() {
         this.fetchpatientmanagement();
         this.selectedpatientmanagement = [];
+        this.selecteddoctorname = [];
     }
 
     fetchpatientmanagement() {
@@ -69,10 +104,19 @@ export class PatientmanagementComponent {
 
         if (event.target.checked) {
             this.selectedpatientmanagement = [];
+            this.selecteddoctorname = [];
 
             this.selectedpatientmanagement.push(patientmanagement.id);
+            this.patientmanagement.filter((item) => {
+                if (this.selectedpatientmanagement[0] === item.id) {
+                    return this.selecteddoctorname.push(item.first_name);
+                }
+            });
+        this.fetchappointments();
+
         } else {
             this.selectedpatientmanagement = [];
+            this.selecteddoctorname = [];
         }
         console.log(this.selectedpatientmanagement);
     }
@@ -107,8 +151,6 @@ export class PatientmanagementComponent {
 
     addpatientmanagement() {
         this.mode = 'add';
-
-       
 
         if (this.patientmanagementForm.valid) {
             const payload = {
@@ -165,7 +207,7 @@ export class PatientmanagementComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: 'Error',
+                        summary: error.error.detail,
                         detail: 'Patient Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -269,7 +311,7 @@ export class PatientmanagementComponent {
                         console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: 'Error',
+                            summary: error.error.detail,
                             detail: 'Patientmanagement Update Failed. Try again Later!',
                         });
                         setTimeout(() => {
@@ -313,7 +355,7 @@ export class PatientmanagementComponent {
                             }
                         );
                     this.messageService.add({
-                        severity: 'info',
+                        severity: 'success',
                         summary: 'Confirmed',
                         detail: 'You have successfully deleted the patient',
                     });
