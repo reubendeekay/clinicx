@@ -1,8 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CardComponent } from '../../Card/card/card.component';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '/home/annamaria/clinicx/clinicX/src/app/Services/api.service';
-import { AuthService } from '/home/annamaria/clinicx/clinicX/src/app/Services/auth.service';
+import { ApiService } from '../../../Services/api.service';
+import { AuthService } from '../../../Services/auth.service';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';

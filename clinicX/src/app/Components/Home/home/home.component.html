@@ -1,142 +1,4 @@
 <div class="homeContainer"><div class="navbar">
-  <p-dialog
-    header="{{ mode === 'add' ? 'MAKE A BOOKING' : 'EDIT A BRANCH' }}"
-    [(visible)]="visible"
-    [modal]="true"
-    [style]="{ width: '70vw' }"
-    [draggable]="false"
-    [resizable]="true"
-    [maximizable]="true"
-    (onHide)="fetchbranches()"
-  >
-    <form [formGroup]="branchForm" class="m-0">
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="Name"
-          formControlName="name"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('name')?.invalid && branchForm?.get('name')?.dirty
-          "
-          >Name is Required</small
-        >
-      </div>
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="Email"
-          formControlName="description"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('description')?.invalid &&
-            branchForm?.get('description')?.dirty
-          "
-          >Email is Required</small
-        >
-      </div>
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="Phone"
-          formControlName="address"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('address')?.invalid &&
-            branchForm?.get('address')?.dirty
-          "
-          >Phone is Required</small
-        >
-      </div>
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="dd-mm-yy"
-          formControlName="phone_number"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('phone_number')?.invalid &&
-            branchForm?.get('phone_number')?.dirty
-          "
-          >Date is Required</small
-        >
-      </div>
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="Branch"
-          formControlName="longitude"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('longitude')?.invalid &&
-            branchForm?.get('longitude')?.dirty
-          "
-          >Branch is Required</small
-        >
-      </div>
-      <div class="field">
-        <input
-          type="text"
-          pInputText
-          placeholder="Service"
-          formControlName="latitude"
-          [style]="{ width: '100%' }"
-        />
-        <small
-          id="username-help"
-          class="block p-error"
-          *ngIf="
-            branchForm?.get('latitude')?.invalid &&
-            branchForm?.get('latitude')?.dirty
-          "
-          >Serviceis Required</small
-        >
-      </div>
-
-      @if(mode === 'add'){
-      <button
-        pButton
-        label="Submit"
-        type="submit"
-        [disabled]="branchForm.invalid"
-        (click)="addbranch()"
-      ></button>
-      } @if(mode === 'edit'){
-      <button
-        pButton
-        label="Update"
-        (click)="updateBranch()"
-        type="submit"
-        [disabled]="branchForm.invalid"
-      ></button>
-      }
-    </form>
-  </p-dialog>
   <div class="logo">
     <img src="../assets/Images/logo.png" alt="clinicx logo" />
     <span>ClinicX</span>
@@ -145,14 +7,6 @@
   <div class="links">
     <span><a href="login">Log In</a></span>
     <span><a href="register">Sign Up</a></span>
-    <button
-    pButton
-    class="outlined"
-    (click)="showDialog(); mode = 'add'; branchForm.reset()"
-  >
-    Book an appointment
-  </button>
-    
   </div>
 </div>
 
@@ -389,7 +243,5 @@
     <img src="../assets/Images/LinkedIn 4.png" alt="LinkedIn" />
     <img src="../assets/Images/Twitter.png" alt="Twitter" />
   </div>
-  
 </div>
-
  </div>
