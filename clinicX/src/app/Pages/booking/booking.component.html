@@ -1,44 +1,49 @@
-<div class="homeContainer"><div class="navbar">
+<div class="homeContainer">
+  <div class="navbar">
     <div class="logo">
       <img src="../assets/Images/logo.png" alt="clinicx logo" />
       <span>ClinicX</span>
     </div>
-  
+
     <div class="links">
       <span><a href="login">Log In</a></span>
       <span><a href="register">Sign Up</a></span>
     </div>
   </div>
-  
-  <h2>Welcome, to get started please schedule an appointment </h2>
+
+  <h2>Welcome, to get started please schedule an appointment</h2>
   <div class="bookingForm">
-  
-  <div class="map">
-    <img src="../assets/Images/Branchmap.png" alt="Branch map" />
-  </div>
+    <div class="map">
+      <img src="../assets/Images/Branchmap.png" alt="Branch map" />
+    </div>
     <form>
       <h3>Book an appointment</h3>
       <h4>Find the best service and doctors around you!</h4>
       <h4>Trust ClinicX today</h4>
-  
+
       <input type="text" placeholder="Name" />
       <input type="text" placeholder="Email" />
       <input type="text" placeholder="Phone" />
       <input type="date" placeholder="dd-mm-yy" />
-      <input type="text" placeholder="Branch" />
+      <select name="Select">
+        <option value="" disabled selected>Branch</option>
+        <option value="Nairobi">Nairobi</option>
+        <option value="Mombasa">Mombasa</option>
+        <option value="Kisumu">Kisumu</option>
+      </select>
+
       <input type="text" placeholder="Service" />
-  
+
       <button class="landingBtn">Check Availability</button>
       <button class="landingBtn">Book Now</button>
-  
     </form>
   </div>
-  
+
   <div class="rated">
     <h3>Top-rated primary care doctors</h3>
     <p>90% of patients gave these primary care doctors 5 stars</p>
     <p>See more highly-recommended doctors</p>
-  
+
     <div class="tiles">
       <app-card
         title="Katie Nemirovsky, DMD"
@@ -75,7 +80,7 @@
       ></app-card>
     </div>
   </div>
-  
+
   <div class="rated">
     <h3>Doctors with the shortest wait time</h3>
     <p>
@@ -83,7 +88,7 @@
       doctors
     </p>
     <p>See more doctors with excellent wait time</p>
-  
+
     <div class="tiles">
       <app-card
         title="Hyun Kyu Song, DDS"
@@ -119,24 +124,23 @@
         description=" did not see this doctor. . I did not even see an endodontist, just a DDS who took x-rays and told me I did not need..."
       ></app-card>
     </div>
-  
-  
-  <div class="footer">
-    <div class="footerlogo">
-      <img src="../assets/Images/footerlogo.png" alt="footerlogo" />
-      <p>© 2024 ClinicX, Inc.</p>
-    </div>
-    <div class="footerinfo">
-      <p>Terms</p>
-      <p>Privacy</p>
-      <p>Site map</p>
-    </div>
-    <div class="socials">
-      <img src="../assets/Images/Facebook.png" alt="Facebook" />
-      <img src="../assets/Images/Instagram.png" alt="Instagram" />
-      <img src="../assets/Images/LinkedIn 4.png" alt="LinkedIn" />
-      <img src="../assets/Images/Twitter.png" alt="Twitter" />
+
+    <div class="footer">
+      <div class="footerlogo">
+        <img src="../assets/Images/footerlogo.png" alt="footerlogo" />
+        <p>© 2024 ClinicX, Inc.</p>
+      </div>
+      <div class="footerinfo">
+        <p>Terms</p>
+        <p>Privacy</p>
+        <p>Site map</p>
+      </div>
+      <div class="socials">
+        <img src="../assets/Images/Facebook.png" alt="Facebook" />
+        <img src="../assets/Images/Instagram.png" alt="Instagram" />
+        <img src="../assets/Images/LinkedIn 4.png" alt="LinkedIn" />
+        <img src="../assets/Images/Twitter.png" alt="Twitter" />
+      </div>
     </div>
   </div>
-   </div>
-  
+</div>
