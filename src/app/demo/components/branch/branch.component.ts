@@ -17,9 +17,10 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 @Component({
     selector: 'app-branch',
     templateUrl: './branch.component.html',
-    styleUrls: ['./branch.component.css'],
-})
+    styleUrls: ['./branch.component.css'],})
 export class BranchComponent {
+    search_query: string = ''; // Declare search_query property
+    searchTerm: string = ''; // Declare searchTerm property
     constructor(
         private http: HttpClient,
         private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class BranchComponent {
     mode: string = 'add';
     selectedbranch: any = [];
     selectedBranch: any;
+    originalBranches: any;
 
     visible: boolean = false;
 
@@ -41,26 +43,63 @@ export class BranchComponent {
         this.visible = true;
     }
 
-    ngOnInit() {
-        this.fetchbranches();
-        this.selectedbranch = [];
+   ngOnInit() {
+    this.fetchbranches();
+}
+onAddressChange() {
+    const address = this.branchForm.get('address')?.value;
+    if (address) {
+      this.getCoordinates(address);
     }
+  }
 
-    fetchbranches() {
-        this.apiservice.fetchBranches().subscribe(
-            (response: any) => {
-                // Handle the API response
-                console.log('API response:', response);
+  getCoordinates(address: string) {
+    // Replace 'YOUR_API_KEY' with your actual API key
+    const apiKey = 'AIzaSyC3b-legecW26W0xiOOm9NUC0RyD1ZxeFY';
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+    
+    this.http.get<any>(apiUrl).subscribe(
+      (response) => {
+        if (response && response.results && response.results.length > 0) {
+          const location = response.results[0].geometry.location;
+          this.branchForm.patchValue({
+            latitude: location.lat,
+            longitude: location.lng
+          });
+        } else {
+          console.error('Geocoding API response is empty or invalid.');
+        }
+      },
+      (error) => {
+        console.error('Error occurred while fetching coordinates:', error);
+      }
+    );
+  }
 
-                this.branches = response;
-                // this.branchForm.controls['code'].setValue(this.branches.length + 1);
-            },
-            (error) => {
-                // Handle the API error
-                console.error('API error:', error);
-            }
-        );
+fetchbranches() {
+    this.apiservice.fetchBranches().subscribe(
+        (response: any) => {
+            this.branches = response;
+            this.originalBranches = [...this.branches]; // Store the original branches
+        },
+        (error) => {
+            console.error('API error:', error);
+        }
+    );
+}
+
+searchBranchesByName() {
+    if (!this.search_query.trim()) {
+        // If search query is empty or consists only of whitespace
+        this.branches = [...this.originalBranches]; // Reset to original branches
+        return;
     }
+    // Filter branches by name
+    this.branches = this.originalBranches.filter((branch: any) =>
+        branch.name.toLowerCase().includes(this.search_query.toLowerCase())
+    );
+}
+    
 
     deleteSelectedBranches() {
     }

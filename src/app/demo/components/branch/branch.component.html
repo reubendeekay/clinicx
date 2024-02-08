@@ -28,6 +28,10 @@
             alt="branches in kenya"
           />
         </div>
+        <div>
+          <input type="text" placeholder="Branch Name" [(ngModel)]="search_query ">
+          <button (click)="searchBranchesByName()">Search</button>
+      </div>
 
         <p-table
           [value]="branches"
@@ -178,6 +182,7 @@
           pInputText
           placeholder="Address"
           formControlName="address"
+          (ngModelChange)="onAddressChange()"
           [style]="{ width: '100%' }"
         />
         <small

@@ -19,6 +19,7 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { FormsModule } from '@angular/forms';
 @NgModule({
     imports: [
         CommonModule,
@@ -39,6 +40,7 @@ import { ToastModule } from 'primeng/toast';
         MessageModule,
         ConfirmDialogModule,
         ToastModule,
+        FormsModule,
     ],
     declarations: [BranchComponent],
     providers: [MessageService, ConfirmationService],
