@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
     imports: [
         CommonModule,
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         ButtonModule,
         HttpClientModule,
         ReactiveFormsModule,
+        ProgressSpinnerModule
     ],
     declarations: [LoginComponent],
 })

@@ -23,7 +23,7 @@ import { authGuard } from './Guards/auth.guard.service';
                         },
                         {
                             path: 'services',
-                            
+
                             loadChildren: () =>
                                 import(
                                     './demo/components/services/services.module'
@@ -92,6 +92,13 @@ import { authGuard } from './Guards/auth.guard.service';
                     loadChildren: () =>
                         import('./demo/components/Login/login.module').then(
                             (m) => m.LoginModule
+                        ),
+                },
+                {
+                    path: 'register',
+                    loadChildren: () =>
+                        import('./demo/components/register/register.component').then(
+                            (m) => m.RegisterComponent
                         ),
                 },
                 // { path: 'notfound', component: NotfoundComponent },

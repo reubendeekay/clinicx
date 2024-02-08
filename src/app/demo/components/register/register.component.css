@@ -1,0 +1,145 @@
+.loginContainer {
+  background: linear-gradient(
+    118.7deg,
+    #d8d2fc 17.58%,
+    #d8d2fc 17.58%,
+    #d8d2fc 17.59%,
+    #fde2e0 41.89%,
+    #e6e4ea 68%,
+    #e0e9f4 103.34%,
+    rgba(230, 225, 232, 0) 103.35%,
+    #e0e9f4 103.35%
+  ) !important; 
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.outter {
+  background-color: white;
+  height: 80%;
+  width: 80%;
+  opacity: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inner {
+  background: radial-gradient(
+    43.3% 107.22% at 51.09% 40.44%,
+    #eff2f6 0%,
+    #f6e3eb 47.58%,
+    #d5deed 93.12%
+  );
+
+  height: 100%;
+  width: 90%;
+  position: absolute;
+  right: 0;
+  opacity: 30%;
+}
+
+.logincontent {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  height: 70%;
+  overflow-y: scroll;
+  padding-right: 30px;
+}
+
+.logincontent h3,
+.logincontent p,
+input {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+input {
+  font-size: 12px;
+  padding-left: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+}
+
+.logincontent form {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.logincontent form button {
+  background: linear-gradient(99.78deg, #9181f4 -5.85%, #5038ed 109.55%);
+  width: max-content;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.loginimage {
+  position: absolute;
+  width: 30%;
+  height: 60%;
+  right: 20%;
+  top: 20%;
+  background: linear-gradient(217.64deg, #9181f4 -5.84%, #5038ed 106.73%);
+  background-image: url("../../../../assets/demo/images/PREVIOUS/loginstripes.png");
+}
+
+.glass {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.32),
+      rgba(255, 255, 255, 0.32)
+    ),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.21), rgba(255, 255, 255, 0.01));
+  width: 60%;
+  height: 70%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 46px;
+  padding: 20px;
+}
+
+.glass p {
+  width: 50%;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.glassimg1 {
+  position: absolute;
+  bottom: 0;
+  right: -40px;
+  height: 90%;
+}
+
+.glassimg2 {
+  position: absolute;
+  bottom: 15%;
+  height: 15%;
+  left: -5%;
+}
+
+@media screen and (max-width: 980px) {
+  .loginimage {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .logincontent {
+    left: 15%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}

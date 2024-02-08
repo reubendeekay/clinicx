@@ -12,11 +12,11 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'app-users',
-    templateUrl: './users.component.html',
-    styleUrls: ['./users.component.css'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
 })
-export class UsersComponent {
+export class RegisterComponent {
     class: any = 'p-datatable-sm';
     constructor(
         private http: HttpClient,
@@ -132,7 +132,7 @@ export class UsersComponent {
                 )[0].toUpperCase(),
             };
 
-            console.log(`Payload: ${JSON.stringify(payload)}`);
+            console.log('Payload: ${JSON.stringify(payload)}');
 
             this.apiservice.createUser(payload).subscribe(
                 (response: any) => {
@@ -217,14 +217,14 @@ export class UsersComponent {
         if (this.userForm.valid) {
             const payload = {
                 ...this.userForm.value,
-                role: 'ADMIN',
+                role: 'patient',
                 user_image:
                     'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
                 marital_status: Object.values(
                     this.userForm.value.marital_status
-                )[0].toUpperCase(),
-                gender: Object.values(this.userForm.value.gender)[0].toUpperCase()
-            }
+                )[0],
+                gender: Object.values(this.userForm.value.gender)[0],
+            };
 
             console.log(`Payload: ${JSON.stringify(payload)}`);
 
@@ -279,7 +279,7 @@ export class UsersComponent {
     }
 
     formattedRecords: any = [];
-    filename: string = `Clinicx Users.xlsx`;
+    filename: string = 'Clinicx Users.xlsx';
     exportexcel() {
         for (const user of this.users) {
             this.formattedRecords.push({
@@ -348,6 +348,6 @@ export class UsersComponent {
                     life: 3000,
                 });
             },
-        });
-    }
+        });
+    }
 }

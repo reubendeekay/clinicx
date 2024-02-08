@@ -1,0 +1,231 @@
+<div class="loginContainer">
+    <div class="outter">
+        <div class="inner"></div>
+    </div>
+
+    <div class="logincontent">
+        <h3>SIGNUP</h3>
+        <p>Please signup to get started</p>
+        <form [formGroup]="userForm" class="m-0">
+            <div class="field">
+                <input
+                    type="text"
+                    pInputText
+                    placeholder=" First First_name"
+                    formControlName="first_name"
+                    [style]="{ width: '100%' }"
+                />
+                <small
+                    id="userfirst_name-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('first_name')?.invalid &&
+                        userForm?.get('first_name')?.dirty
+                    "
+                >
+                    First_name is Required</small
+                >
+            </div>
+    
+            <div class="field">
+                <input
+                    type="text"
+                    pInputText
+                    placeholder=" Last_name"
+                    formControlName="last_name"
+                    [style]="{ width: '100%' }"
+                />
+                <small
+                    id="userlast_name-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('last_name')?.invalid &&
+                        userForm?.get('last_name')?.dirty
+                    "
+                >
+                    Last_name is Required</small
+                >
+            </div>
+            <div class="field" *ngIf="mode == 'add'">
+                <p-password
+                    placeholder="Password"
+                    formControlName="password"
+                    [style]="{ width: '100%' }"
+                ></p-password>
+    
+                <small
+                    id="userphone_number-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('password')?.invalid &&
+                        userForm?.get('password')?.dirty
+                    "
+                >
+                    Phone_number is Required</small
+                >
+            </div>
+            <div class="field">
+                <input
+                    type="text"
+                    pInputText
+                    placeholder="  Email"
+                    formControlName="email"
+                    [style]="{ width: '100%' }"
+                />
+                <small
+                    id="useremail-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('email')?.invalid &&
+                        userForm?.get('email')?.dirty
+                    "
+                >
+                    Email is Required</small
+                >
+            </div>
+            <div class="field">
+                <input
+                    type="text"
+                    pInputText
+                    placeholder="  Phone_number"
+                    formControlName="phone_number"
+                    [style]="{ width: '100%' }"
+                />
+                <small
+                    id="userphone_number-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('phone_number')?.invalid &&
+                        userForm?.get('phone_number')?.dirty
+                    "
+                >
+                    Phone_number is Required</small
+                >
+            </div>
+    
+            <div class="field">
+                <p-dropdown
+                    class="block"
+                    [style]="{ width: '100%' }"
+                    [options]="maritalOptions"
+                    formControlName="isActive"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="  Marital_status"
+                    formControlName="marital_status"
+                >
+                    <ng-template let-service pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ service.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <small
+                    id="marital_status-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('marital_status')?.invalid &&
+                        userForm?.get('marital_status')?.dirty
+                    "
+                >
+                    Marital_status is Required</small
+                >
+            </div>
+            <div class="field">
+                <p-dropdown
+                    class="block"
+                    [style]="{ width: '100%' }"
+                    [options]="genderOptions"
+                    formControlName="isActive"
+                    optionLabel="name"
+                    [filter]="true"
+                    filterBy="name"
+                    [showClear]="true"
+                    placeholder="  Gender"
+                    formControlName="gender"
+                >
+                    <ng-template let-service pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ service.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <small
+                    id="usergender-help"
+                    class="block p-error"
+                    *ngIf="
+                        userForm?.get('gender')?.invalid &&
+                        userForm?.get('gender')?.dirty
+                    "
+                >
+                    Gender is Required</small
+                >
+            </div>
+    
+            <div class="field">
+                <input
+                    type="date"
+                    formControlName="date_of_birth"
+                    pInputText
+                    placeholder=" Date_of_birth"
+                    [style]="{ width: '100%' }"
+                />
+                <small
+                    id="userdate_of_birth-help"
+                    class="block p-error"
+                    *ngIf="
+                        (userForm?.get('date_of_birth')?.invalid &&
+                        userForm?.get('date_of_birth')?.dirty &&
+                        !userForm?.get('date_of_birth')?.errors?.futureDate) ||
+                        (userForm?.get('date_of_birth')?.errors?.required &&
+                        userForm?.get('date_of_birth')?.touched)
+                    "
+                >
+                    <span *ngIf="userForm?.get('date_of_birth')?.errors?.required">
+                        Date_of_birth is Required
+                    </span>
+                    <span *ngIf="userForm?.get('date_of_birth')?.errors?.futureDate">
+                        Date_of_birth must not be a future date
+                    </span>
+                </small>
+            </div>
+            
+    
+            @if(mode === 'add'){
+            <button
+                pButton
+                label="Submit"
+                type="submit"
+                [disabled]="userForm.invalid"
+                (click)="adduser()"
+            ></button>
+            } @if(mode === 'edit'){
+            <button
+                pButton
+                label="Update"
+                (click)="updateUser()"
+                type="submit"
+                [disabled]="userForm.invalid"
+            ></button>
+            }
+        </form>
+    </div>
+
+    <div class="loginimage">
+        <div class="glass">
+            <p>ClinicX, the best medical service for you!</p>
+            <img
+                class="glassimg1"
+                src="../../../../assets/demo/images/PREVIOUS/women with tab 1.png"
+                alt="woman with tab"
+            />
+            <img
+                class="glassimg2"
+                alt="lightbulb"
+                src="../../../../assets/demo/images/PREVIOUS/lightbulb.png"
+            />
+        </div>
+    </div>
+</div>

@@ -132,16 +132,27 @@
                         @if(mode === 'add'){
                         <div class="field">
                             <div class="field">
-                                <input
-                                    type="text"
-                                    pInputText
+                                <p-dropdown
+                                    class="block"
+                                    [style]="{ width: '100%' }"
+                                    [options]="users"
+                                    optionLabel="name"
+                                    [filter]="true"
+                                    filterBy="name"
+                                    [showClear]="true"
                                     placeholder="2547..."
                                     formControlName="user_id"
-                                    [style]="{ width: '100%' }"
-                                />
-                               
+                                >
+                                    <ng-template let-service pTemplate="item">
+                                        <div
+                                            class="flex align-items-center gap-2"
+                                        >
+                                            <div>{{ service.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
                             </div>
-                            
+
                             <small
                                 id="userfirst_name-help"
                                 class="block p-error"
@@ -172,7 +183,7 @@
                         ></button>
                         }
                     </form>
-                </p-dialog> 
+                </p-dialog>
                 <p-dialog
                     header="APPOINTMENTS FOR {{ selecteddoctorname[0] }}"
                     [(visible)]="tablevisible"
@@ -231,7 +242,6 @@
                                 <td>{{ appointment.appointment_date }}</td>
                                 <td>{{ appointment.appointment_time }}</td>
                                 <td>{{ appointment.reason }}</td>
-
                             </tr></ng-template
                         >
                               </p-table

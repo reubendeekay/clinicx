@@ -148,15 +148,15 @@ export class PatientmanagementComponent {
         console.log(this.selectedpatientmanagement);
     }
 
-          // Define the custom validator function for future dates
-          futureDateValidator(control: FormControl) {
-            const selectedDate = new Date(control.value);
-            const currentDate = new Date();
-            if (selectedDate > currentDate) {
-                return { futureDate: true };
-            }
-            return null;
+    // Define the custom validator function for future dates
+    futureDateValidator(control: FormControl) {
+        const selectedDate = new Date(control.value);
+        const currentDate = new Date();
+        if (selectedDate > currentDate) {
+            return { futureDate: true };
         }
+        return null;
+    }
     patientmanagementForm = this.fb.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
@@ -165,7 +165,7 @@ export class PatientmanagementComponent {
         phone_number: ['', Validators.required],
         address: ['', Validators.required],
         blood_group: ['', Validators.required],
-        date_of_birth: ['', [Validators.required,this.futureDateValidator]],
+        date_of_birth: ['', [Validators.required, this.futureDateValidator]],
         about: ['', Validators.required],
         gender: ['', Validators.required],
         // user_image:['', Validators.required],
@@ -173,10 +173,11 @@ export class PatientmanagementComponent {
 
     maritalOptions = [
         { name: 'Married' },
+        { name: 'Divorced' },
+        { name: 'Widowed' },
         { name: 'Single' },
-        { name: 'Other' },
     ];
-    genderOptions = [{ name: 'Female' }, { name: 'Male' }, { name: 'Other' }];
+    genderOptions = [{ name: 'Female' }, { name: 'Male' }];
     bloodOptions = [
         { name: 'A+' },
         { name: 'O-' },
@@ -196,13 +197,13 @@ export class PatientmanagementComponent {
                     'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
                 marital_status: Object.values(
                     this.patientmanagementForm.value.marital_status
-                )[0],
+                )[0].toUpperCase(),
                 gender: Object.values(
                     this.patientmanagementForm.value.gender
-                )[0],
+                )[0].toUpperCase(),
                 blood_group: Object.values(
                     this.patientmanagementForm.value.blood_group
-                )[0],
+                )[0].toUpperCase(),
                 // date_of_birth:
                 //     this.patientmanagementForm.value.date_of_birth +
                 //     '07T11:38:20.960000',
@@ -302,13 +303,13 @@ export class PatientmanagementComponent {
                     'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
                 marital_status: Object.values(
                     this.patientmanagementForm.value.marital_status
-                )[0],
+                )[0].toUpperCase(),
                 gender: Object.values(
                     this.patientmanagementForm.value.gender
-                )[0],
+                )[0].toUpperCase(),
                 blood_group: Object.values(
                     this.patientmanagementForm.value.blood_group
-                )[0],
+                )[0].toUpperCase(),
             };
 
             console.log(`Payload: ${JSON.stringify(payload)}`);

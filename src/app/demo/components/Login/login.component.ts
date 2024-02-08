@@ -27,12 +27,16 @@ export class LoginComponent {
         password: ['', [Validators.required]],
     });
 
+    loader: boolean = false;
+
     LoginProcess() {
         if (this.loginForm.valid) {
             const payload = {
                 username: this.loginForm.get('emailAddress')?.value,
                 password: this.loginForm.get('password')?.value,
             };
+
+            this.loader = true;
 
             console.log(`Payload: ${JSON.stringify(payload)}`);
 
@@ -57,6 +61,8 @@ export class LoginComponent {
                             this.loginForm.get('emailAddress')?.value
                         )
                     );
+            this.loader = false;
+
                 },
                 (error: any) => {
                     // Handle the error response here
@@ -66,6 +72,7 @@ export class LoginComponent {
                         summary: 'Login Failed. Please check your credentials.',
                         duration: 5000,
                     });
+                    this.loader = false;
                 }
             );
         }
