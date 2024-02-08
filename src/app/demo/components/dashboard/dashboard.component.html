@@ -72,6 +72,21 @@
         </div>
     </div>
 </div>
+<div class=" flex col-12 xl:col-6" >
+        <div class="  flex  gap-2 charts">
+          <div class="card">
+            <h3>Hospital Survey</h3>
+            <p-chart type="line" [data]="data" [options]="options"></p-chart>
+          </div>
+          <div class="card">
+            <h3>Common Diseases Report</h3>
+            <p-chart
+              type="bar"
+              [data]="bardata"
+              [options]="bardata"
+            ></p-chart>
+          </div>
+        </div>
 
     <!-- <div class="col-12 xl:col-6">
             <div class="card">

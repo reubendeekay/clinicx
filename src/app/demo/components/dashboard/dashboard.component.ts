@@ -8,98 +8,221 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
     templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent {
+    data: any;
+    options: any;
+    bardata: any;
+    baroptions: any;
+    appointments: any = [
+        {
+            number: '001 ',
+            patientName: 'Jane Doe ',
+            assignedDoctor: ' Dr.Jacob Ryan ',
+            date: '12 Jan 2024',
+            diseases: ' Fever',
+        },
+        {
+            number: '001 ',
+            patientName: 'Jane Doe ',
+            assignedDoctor: ' Dr.Jacob Ryan ',
+            date: '12 Jan 2024',
+            diseases: ' Fever',
+        },
+        {
+            number: '001 ',
+            patientName: 'Jane Doe ',
+            assignedDoctor: ' Dr.Jacob Ryan ',
+            date: '12 Jan 2024',
+            diseases: ' Fever',
+        },
+    ];
 
-    items!: MenuItem[];
+    doctorList: any = [
+        {
+            DoctorName: ' Dr.Jacob Ryan ',
+            Status: 'Available',
+        },
+        {
+            DoctorName: ' Dr.Jacob Ryan ',
+            Status: 'Available',
+        },
+        {
+            DoctorName: ' Dr.Jacob Ryan ',
+            Status: 'Unavailable',
+        },
+        {
+            DoctorName: ' Dr.Jacob Ryan ',
+            Status: 'Unavailable',
+        },
+    ];
 
-    products!: Product[];
-
-    chartData: any;
-
-    chartOptions: any;
-
-    subscription!: Subscription;
-
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
-        this.subscription = this.layoutService.configUpdate$
-        .pipe(debounceTime(25))
-        .subscribe((config) => {
-            this.initChart();
-        });
-    }
-
+    // charts
     ngOnInit() {
-        this.initChart();
-        this.productService.getProductsSmall().then(data => this.products = data);
-
-        this.items = [
-            { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-            { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-        ];
-    }
-
-    initChart() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-        this.chartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        const textColorSecondary = documentStyle.getPropertyValue(
+            '--text-color-secondary'
+        );
+        const surfaceBorder =
+            documentStyle.getPropertyValue('--surface-border');
+        this.data = {
+            labels: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'sep',
+                'oct',
+                'Nov',
+                'Dec',
+            ],
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'New Patients',
                     fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    borderColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    tension: .4
+                    borderColor: '#E3A3E0',
+                    yAxisID: 'y',
+                    tension: 0.4,
+                    data: [65, 59, 80, 81, 56, 55, 10, 19, 86, 27, 90, 50],
                 },
                 {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
+                    label: 'Old Patients',
                     fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--green-600'),
-                    borderColor: documentStyle.getPropertyValue('--green-600'),
-                    tension: .4
-                }
-            ]
+                    borderColor: '#D8D2FC',
+                    yAxisID: 'y1',
+                    tension: 0.4,
+                    data: [28, 48, 40, 19, 86, 27, 90, 19, 86, 27, 90, 50],
+                },
+            ],
         };
 
-        this.chartOptions = {
+        this.options = {
+            stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: 1.2,
             plugins: {
                 legend: {
                     labels: {
-                        color: textColor
-                    }
-                }
+                        usePointStyle: true,
+                        color: '#271E4A',
+                    },
+                },
             },
             scales: {
                 x: {
+                    display: true,
+
                     ticks: {
-                        color: textColorSecondary
+                        color: '#271E4A',
+                        font: {
+                            family: 'Kanit',
+                        },
                     },
                     grid: {
+                        display: false,
                         color: surfaceBorder,
-                        drawBorder: false
-                    }
+                    },
                 },
                 y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
                     ticks: {
-                        color: textColorSecondary
+                        color: textColorSecondary,
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false
-                    }
-                }
-            }
+                    },
+                },
+                y1: {
+                    type: 'linear',
+                    display: false,
+                    position: 'right',
+                    ticks: {
+                        color: textColorSecondary,
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                        color: surfaceBorder,
+                    },
+                },
+            },
         };
-    }
 
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        // bar chart
+        this.bardata = {
+            labels: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+            ],
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Dataset 1',
+                    backgroundColor: '#E3A3E0',
+                    data: [50, 25, 12, 48, 90, 76, 42],
+                },
+                {
+                    type: 'bar',
+                    label: 'Dataset 2',
+                    backgroundColor: '#A1D7F9',
+                    data: [21, 84, 24, 75, 37, 65, 34],
+                },
+                {
+                    type: 'bar',
+                    label: 'Dataset 3',
+                    backgroundColor: '#CBD6F3',
+                    data: [41, 52, 24, 74, 23, 21, 32],
+                },
+            ],
+        };
+
+        this.baroptions = {
+            maintainAspectRatio: false,
+            aspectRatio: 1.2,
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        color: textColor,
+                    },
+                },
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: {
+                        color: textColorSecondary,
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false,
+                    },
+                },
+                y: {
+                    stacked: true,
+                    ticks: {
+                        color: textColorSecondary,
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false,
+                    },
+                },
+            },
+        };
     }
 }
