@@ -153,7 +153,7 @@ export class UsersComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error.detail,
+                        summary: error.error[0].detail,
                         detail: 'User Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -248,7 +248,7 @@ export class UsersComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error.detail,
+                        summary: error.error[0].detail,
                         detail: 'User Update Failed. Try again Later!',
                     });
                     setTimeout(() => {
