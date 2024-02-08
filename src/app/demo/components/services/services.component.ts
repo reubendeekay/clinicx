@@ -235,11 +235,19 @@ export class ServicesComponent {
                     (error) => {
                         // Handle the API error
                         console.error('API error:', error);
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: error.error.detail,
-                            detail: 'Service Update Failed. Try again Later!',
-                        });
+                       if (error.error.detail == null) {
+                           this.messageService.add({
+                               severity: 'success',
+                               summary: 'Confirmed',
+                               detail: 'You have successfully Service an Appointment',
+                           });
+                       } else {
+                           this.messageService.add({
+                               severity: 'error',
+                               summary: error.error.detail,
+                               detail: 'Service Update Failed. Try again Later!',
+                           });
+                       }
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
@@ -278,13 +286,22 @@ export class ServicesComponent {
                             (error) => {
                                 // Handle the API error
                                 console.error('API error:', error);
+
+                                if (error.error.detail == null) {
+                                    this.messageService.add({
+                                        severity: 'success',
+                                        summary: 'Confirmed',
+                                        detail: 'You have Deleted Service an Appointment',
+                                    });
+                                } else {
+                                    this.messageService.add({
+                                        severity: 'error',
+                                        summary: error.error.detail,
+                                        detail: 'Service Deleted Failed. Try again Later!',
+                                    });
+                                }
                             }
                         );
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Confirmed',
-                        detail: 'You have successfully deleted the service',
-                    });
                 } else {
                     this.messageService.add({
                         severity: 'info',

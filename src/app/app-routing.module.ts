@@ -97,8 +97,8 @@ import { authGuard } from './Guards/auth.guard.service';
                 {
                     path: 'register',
                     loadChildren: () =>
-                        import('./demo/components/register/register.component').then(
-                            (m) => m.RegisterComponent
+                        import('./demo/components/register/register.module').then(
+                            (m) => m.RegisterModule
                         ),
                 },
                 // { path: 'notfound', component: NotfoundComponent },

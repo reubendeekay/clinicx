@@ -260,11 +260,19 @@ export class BranchComponent {
                 (error) => {
                     // Handle the API error
                     console.error('API error:', error);
-                    this.messageService.add({
+                    if (error.error.detail == null) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Confirmed',
+                            detail: 'You have successfully Created a Branch',
+                        }); 
+
+                    } else{ this.messageService.add({
                         severity: 'error',
                         summary: error.error.detail,
                         detail: 'Branch Creation Failed. Try again Later!',
-                    });
+                    });}
+                   
                     setTimeout(() => {
                         this.visible = false;
                     }, 2000);
@@ -347,11 +355,19 @@ export class BranchComponent {
                     (error) => {
                         // Handle the API error
                         console.error('API error:', error);
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: error.error.detail,
-                            detail: 'Branch Update Failed. Try again Later!',
-                        });
+                       if (error.error.detail == null) {
+                           this.messageService.add({
+                               severity: 'success',
+                               summary: 'Confirmed',
+                               detail: 'You have successfully Updated a Branch',
+                           });
+                       } else {
+                           this.messageService.add({
+                               severity: 'error',
+                               summary: error.error.detail,
+                               detail: 'Branch Update Failed. Try again Later!',
+                           });
+                       }
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
@@ -386,8 +402,19 @@ export class BranchComponent {
                             this.fetchbranches();
                         },
                         (error) => {
-                            // Handle the API error
-                            console.error('API error:', error);
+                            if (error.error.detail == null) {
+                                this.messageService.add({
+                                    severity: 'success',
+                                    summary: 'Confirmed',
+                                    detail: 'You have successfully Deleted an Branch',
+                                });
+                            } else {
+                                this.messageService.add({
+                                    severity: 'error',
+                                    summary: error.error.detail,
+                                    detail: 'Branch Deleted Failed. Try again Later!',
+                                });
+                            }
                         }
                     );
                     this.messageService.add({

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
@@ -9,7 +9,7 @@ import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
@@ -19,6 +19,7 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { PasswordModule } from 'primeng/password';
 @NgModule({
     imports: [
         CommonModule,
@@ -39,8 +40,11 @@ import { ToastModule } from 'primeng/toast';
         MessageModule,
         ConfirmDialogModule,
         ToastModule,
+        PasswordModule,
+        FormsModule,
     ],
     declarations: [RegisterComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [MessageService, ConfirmationService],
 })
 export class RegisterModule {}

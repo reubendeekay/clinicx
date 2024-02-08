@@ -91,15 +91,15 @@ export class RegisterComponent {
         { name: 'B+' },
         { name: 'AB' },
     ];
-        // Define the custom validator function for future dates
-        futureDateValidator(control: FormControl) {
-            const selectedDate = new Date(control.value);
-            const currentDate = new Date();
-            if (selectedDate > currentDate) {
-                return { futureDate: true };
-            }
-            return null;
+    // Define the custom validator function for future dates
+    futureDateValidator(control: FormControl) {
+        const selectedDate = new Date(control.value);
+        const currentDate = new Date();
+        if (selectedDate > currentDate) {
+            return { futureDate: true };
         }
+        return null;
+    }
 
     userForm = this.fb.group({
         email: ['', Validators.required],
@@ -107,7 +107,7 @@ export class RegisterComponent {
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         gender: ['', Validators.required],
-        date_of_birth: ['', [Validators.required,this.futureDateValidator]],
+        date_of_birth: ['', [Validators.required, this.futureDateValidator]],
         marital_status: ['', Validators.required],
         password: ['', Validators.required],
     });
@@ -132,7 +132,7 @@ export class RegisterComponent {
                 )[0].toUpperCase(),
             };
 
-            console.log('Payload: ${JSON.stringify(payload)}');
+            console.log(`Payload: ${JSON.stringify(payload)}`);
 
             this.apiservice.createUser(payload).subscribe(
                 (response: any) => {
@@ -148,7 +148,7 @@ export class RegisterComponent {
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
-                        this.route.navigate(['dashboard/users']);
+                        this.route.navigate(['login']);
                     } else {
                         this.messageService.add({
                             severity: 'error',
@@ -166,7 +166,7 @@ export class RegisterComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error[0].detail,
+                        summary: error.error.detail,
                         detail: 'User Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -217,13 +217,15 @@ export class RegisterComponent {
         if (this.userForm.valid) {
             const payload = {
                 ...this.userForm.value,
-                role: 'patient',
+                role: 'ADMIN',
                 user_image:
                     'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
                 marital_status: Object.values(
                     this.userForm.value.marital_status
-                )[0],
-                gender: Object.values(this.userForm.value.gender)[0],
+                )[0].toUpperCase(),
+                gender: Object.values(
+                    this.userForm.value.gender
+                )[0].toUpperCase(),
             };
 
             console.log(`Payload: ${JSON.stringify(payload)}`);
@@ -261,7 +263,7 @@ export class RegisterComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error[0].detail,
+                        summary: error.error.detail,
                         detail: 'User Update Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -279,7 +281,7 @@ export class RegisterComponent {
     }
 
     formattedRecords: any = [];
-    filename: string = 'Clinicx Users.xlsx';
+    filename: string = `Clinicx Users.xlsx`;
     exportexcel() {
         for (const user of this.users) {
             this.formattedRecords.push({
@@ -321,6 +323,7 @@ export class RegisterComponent {
 
                             // Refresh the useres after deletion
                             this.fetchuseres();
+                            this.route.navigate(['login']);
                         },
                         (error) => {
                             // Handle the API error
@@ -348,6 +351,6 @@ export class RegisterComponent {
                     life: 3000,
                 });
             },
-        });
-    }
+        });
+    }
 }

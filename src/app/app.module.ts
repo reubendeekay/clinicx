@@ -17,11 +17,12 @@ import { NgToastModule } from 'ng-angular-popup';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [AppRoutingModule, AppLayoutModule, CommonModule, RouterLink, NgToastModule, ReactiveFormsModule, HttpClientModule],
+    imports: [AppRoutingModule, AppLayoutModule, CommonModule, RouterLink, NgToastModule, ReactiveFormsModule, HttpClientModule, DropdownModule],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService,

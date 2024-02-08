@@ -16,7 +16,6 @@ import { DialogModule } from 'primeng/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 
-
 @Component({
     selector: 'app-appointments',
     templateUrl: './appoinments.component.html',
@@ -165,21 +164,21 @@ export class AppointmentsComponent {
         console.log(this.selectedappointments);
     }
 
-            // Define the custom validator function for future dates
-            futureDateValidator(control: FormControl) {
-                const selectedDate = new Date(control.value);
-                const currentDate = new Date();
-                if (selectedDate < currentDate) {
-                    return { futureDate: true };
-                }
-                return null;
-            }
+    // Define the custom validator function for future dates
+    futureDateValidator(control: FormControl) {
+        const selectedDate = new Date(control.value);
+        const currentDate = new Date();
+        if (selectedDate < currentDate) {
+            return { futureDate: true };
+        }
+        return null;
+    }
 
     appointmentsForm = this.fb.group({
         patient_id: ['', Validators.required],
         doctor_id: ['', Validators.required],
         service_id: ['', Validators.required],
-        appointment_date: ['', [Validators.required,this.futureDateValidator]],
+        appointment_date: ['', [Validators.required, this.futureDateValidator]],
         appointment_time: ['', Validators.required],
         reason: ['', Validators.required],
     });
@@ -253,11 +252,19 @@ export class AppointmentsComponent {
                 (error) => {
                     // Handle the API error
                     console.error('API error:', error);
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Error',
-                        detail: 'Appointments Creation Failed. Try again Later!',
-                    });
+                    if (error.error.detail == null) {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Confirmed',
+                            detail: 'You have successfully Updated an Appointment',
+                        });
+                    } else {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: error.error.detail,
+                            detail: 'Appointment Update Failed. Try again Later!',
+                        });
+                    }
                     setTimeout(() => {
                         this.visible = false;
                     }, 2000);
@@ -368,11 +375,19 @@ export class AppointmentsComponent {
                     (error) => {
                         // Handle the API error
                         console.error('API error:', error);
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Error',
-                            detail: 'Appointments Update Failed. Try again Later!',
-                        });
+                        if (error.error.detail == null) {
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Confirmed',
+                                detail: 'You have successfully Updated an Appointment',
+                            });
+                        } else {
+                            this.messageService.add({
+                                severity: 'error',
+                                summary: error.error.detail,
+                                detail: 'Appointment Update Failed. Try again Later!',
+                            });
+                        }
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
@@ -410,6 +425,23 @@ export class AppointmentsComponent {
                             },
                             (error) => {
                                 // Handle the API error
+                                if (error.error.detail == null) {
+                                    this.messageService.add({
+                                        severity: 'success',
+                                        summary: 'Confirmed',
+                                        detail: 'You have successfully Deleted an Appointment',
+                                    });
+                                } else {
+                                    this.messageService.add({
+                                        severity: 'error',
+                                        summary: error.error.detail,
+                                        detail: 'Appointment Deleted Failed. Try again Later!',
+                                    });
+                                }
+                                setTimeout(() => {
+                                    this.visible = false;
+                                }, 2000);
+
                                 console.error('API error:', error);
                             }
                         );
