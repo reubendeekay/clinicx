@@ -179,21 +179,29 @@
         <div class="field">
             <input
                 type="date"
-                pInputText
-                placeholder="Patient Appointment_date"
                 formControlName="appointment_date"
+                pInputText
+                placeholder=" appointment_date"
                 [style]="{ width: '100%' }"
             />
             <small
-                id="userappointment_date-help"
+                id="userdate_of_birth-help"
                 class="block p-error"
                 *ngIf="
-                    appointmentsForm?.get('appointment_time')?.invalid &&
-                    appointmentsForm?.get('appointment_time')?.dirty
+                    (appointmentsForm?.get('appointment_date')?.invalid &&
+                    appointmentsForm?.get('appointment_date')?.dirty &&
+                    !appointmentsForm?.get('appointment_date')?.errors?.futureDate) ||
+                    (appointmentsForm?.get('appointment_date')?.errors?.required &&
+                    appointmentsForm?.get('appointment_date')?.touched)
                 "
             >
-                Appointment_time is Required</small
-            >
+                <span *ngIf="appointmentsForm?.get('appointment_date')?.errors?.required">
+                    Date_of_birth is Required
+                </span>
+                <span *ngIf="appointmentsForm?.get('appointment_date')?.errors?.futureDate">
+                    Appointment_date must not be a future date
+                </span>
+            </small>
         </div>
         <div class="field">
             <input

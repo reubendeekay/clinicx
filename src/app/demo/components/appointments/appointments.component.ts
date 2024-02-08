@@ -14,6 +14,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
     selector: 'app-appointments',
@@ -163,11 +165,21 @@ export class AppointmentsComponent {
         console.log(this.selectedappointments);
     }
 
+            // Define the custom validator function for future dates
+            futureDateValidator(control: FormControl) {
+                const selectedDate = new Date(control.value);
+                const currentDate = new Date();
+                if (selectedDate < currentDate) {
+                    return { futureDate: true };
+                }
+                return null;
+            }
+
     appointmentsForm = this.fb.group({
         patient_id: ['', Validators.required],
         doctor_id: ['', Validators.required],
         service_id: ['', Validators.required],
-        appointment_date: ['', Validators.required],
+        appointment_date: ['', [Validators.required,this.futureDateValidator]],
         appointment_time: ['', Validators.required],
         reason: ['', Validators.required],
     });

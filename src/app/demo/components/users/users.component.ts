@@ -9,6 +9,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-users',
@@ -90,6 +91,15 @@ export class UsersComponent {
         { name: 'B+' },
         { name: 'AB' },
     ];
+        // Define the custom validator function for future dates
+        futureDateValidator(control: FormControl) {
+            const selectedDate = new Date(control.value);
+            const currentDate = new Date();
+            if (selectedDate > currentDate) {
+                return { futureDate: true };
+            }
+            return null;
+        }
 
     userForm = this.fb.group({
         email: ['', Validators.required],
@@ -97,7 +107,7 @@ export class UsersComponent {
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         gender: ['', Validators.required],
-        date_of_birth: ['', Validators.required],
+        date_of_birth: ['', [Validators.required,this.futureDateValidator]],
         marital_status: ['', Validators.required],
         password: ['', Validators.required],
     });

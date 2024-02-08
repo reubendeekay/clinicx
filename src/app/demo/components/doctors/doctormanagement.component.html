@@ -131,23 +131,17 @@
                         </div>
                         @if(mode === 'add'){
                         <div class="field">
-                            <p-dropdown
-                                class="block"
-                                [style]="{ width: '100%' }"
-                                [options]="users"
-                                formControlName="user_id"
-                                optionLabel="name"
-                                [filter]="true"
-                                filterBy="name"
-                                [showClear]="true"
-                                placeholder="Doctor Phone Number"
-                            >
-                                <ng-template let-service pTemplate="item">
-                                    <div class="flex align-items-center gap-2">
-                                        <div>{{ service.name }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
+                            <div class="field">
+                                <input
+                                    type="text"
+                                    pInputText
+                                    placeholder="2547..."
+                                    formControlName="user_id"
+                                    [style]="{ width: '100%' }"
+                                />
+                               
+                            </div>
+                            
                             <small
                                 id="userfirst_name-help"
                                 class="block p-error"
