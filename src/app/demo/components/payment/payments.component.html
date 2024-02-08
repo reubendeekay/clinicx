@@ -1,7 +1,7 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Payments</h3>
     <div class="icons">
-        <div (click)="showDialog(); mode = 'add'; userForm.reset()">
+        <div (click)="showDialog(); mode = 'add'; paymentsForm.reset()">
             <i class="pi pi-plus"></i>
         </div>
         <i class="pi pi-download" style="cursor: pointer"></i>
@@ -27,7 +27,7 @@
             <th></th>
             <th [style]="{ backgroundColor: '#FFFFFF' }">First Name</th>
             <th [style]="{ backgroundColor: '#FFFFFF' }">Last Name</th>
-            <th [style]="{ backgroundColor: '#FFFFFF' }">Email</th>
+            <th [style]="{ backgroundColor: '#FFFFFF' }">Amount</th>
             <th [style]="{ backgroundColor: '#FFFFFF' }">Phone Number</th>
 
             <th [style]="{ backgroundColor: '#FFFFFF' }">Gender</th>
@@ -45,25 +45,21 @@
             <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user>
+    <ng-template pTemplate="body" let-payments>
         <tr>
             <td>
                 <input
                     type="checkbox"
-                    (change)="onCheckboxChange($event, user)"
+                    (change)="onCheckboxChange($event, payments)"
                 />
             </td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone_number }}</td>
-            <td>{{ user.gender }}</td>
-            <!-- <td>{{ user.role }}</td> -->
-            <td>{{ user.marital_status }}</td>
-            <td>{{ user.date_of_birth }}</td>
+            <td>{{ payments.payment_date }}</td>
+            <td>{{ payments.payment_type }}</td>
+            <td>{{ payments.amount }}</td>
+            <td>{{ payments.appointment_id }}</td>
             <td
                 style="color: #20e600; cursor: pointer"
-                (click)="editUser(user)"
+                (click)="editPayments(payments)"
             >
                 EDIT
             </td>
@@ -73,124 +69,50 @@
 >
 
 <p-dialog
-    header="{{ mode === 'add' ? 'ADD A USER' : 'EDIT A USER' }}"
+    header="{{ mode === 'add' ? 'ADD A PAYMENTS' : 'EDIT A PAYMENTS' }}"
     [(visible)]="visible"
     [modal]="true"
     [style]="{ width: '50vw', height: '350px' }"
     [draggable]="true"
     [resizable]="true"
     [maximizable]="true"
-    (onHide)="fetchuseres()"
+    (onHide)="fetchpaymentses()"
 >
-    <form [formGroup]="userForm" class="m-0">
+    <form [formGroup]="paymentsForm" class="m-0">
         <div class="field">
             <input
                 type="text"
                 pInputText
-                placeholder=" First First_name"
-                formControlName="first_name"
+                placeholder=" First Payment_date"
+                formControlName="payment_date"
                 [style]="{ width: '100%' }"
             />
             <small
-                id="userfirst_name-help"
+                id="paymentspayment_date-help"
                 class="block p-error"
                 *ngIf="
-                    userForm?.get('first_name')?.invalid &&
-                    userForm?.get('first_name')?.dirty
+                    paymentsForm?.get('payment_date')?.invalid &&
+                    paymentsForm?.get('payment_date')?.dirty
                 "
             >
-                First_name is Required</small
+                Payment_date is Required</small
             >
         </div>
 
-        <div class="field">
-            <input
-                type="text"
-                pInputText
-                placeholder=" Last_name"
-                formControlName="last_name"
-                [style]="{ width: '100%' }"
-            />
-            <small
-                id="userlast_name-help"
-                class="block p-error"
-                *ngIf="
-                    userForm?.get('last_name')?.invalid &&
-                    userForm?.get('last_name')?.dirty
-                "
-            >
-                Last_name is Required</small
-            >
-        </div>
-        <div class="field" *ngIf="mode == 'add'">
-            <p-password
-                placeholder="Password"
-                formControlName="password"
-                [style]="{ width: '100%' }"
-            ></p-password>
-
-            <small
-                id="userphone_number-help"
-                class="block p-error"
-                *ngIf="
-                    userForm?.get('password')?.invalid &&
-                    userForm?.get('password')?.dirty
-                "
-            >
-                Phone_number is Required</small
-            >
-        </div>
-        <div class="field">
-            <input
-                type="text"
-                pInputText
-                placeholder="  Email"
-                formControlName="email"
-                [style]="{ width: '100%' }"
-            />
-            <small
-                id="useremail-help"
-                class="block p-error"
-                *ngIf="
-                    userForm?.get('email')?.invalid &&
-                    userForm?.get('email')?.dirty
-                "
-            >
-                Email is Required</small
-            >
-        </div>
-        <div class="field">
-            <input
-                type="text"
-                pInputText
-                placeholder="  Phone_number"
-                formControlName="phone_number"
-                [style]="{ width: '100%' }"
-            />
-            <small
-                id="userphone_number-help"
-                class="block p-error"
-                *ngIf="
-                    userForm?.get('phone_number')?.invalid &&
-                    userForm?.get('phone_number')?.dirty
-                "
-            >
-                Phone_number is Required</small
-            >
-        </div>
+       
 
         <div class="field">
             <p-dropdown
                 class="block"
                 [style]="{ width: '100%' }"
-                [options]="maritalOptions"
+                [options]="appointments"
                 formControlName="isActive"
                 optionLabel="name"
                 [filter]="true"
                 filterBy="name"
                 [showClear]="true"
-                placeholder="  Marital_status"
-                formControlName="marital_status"
+                placeholder="  Appointment_id"
+                formControlName="appointment_id"
             >
                 <ng-template let-service pTemplate="item">
                     <div class="flex align-items-center gap-2">
@@ -199,82 +121,71 @@
                 </ng-template>
             </p-dropdown>
             <small
-                id="marital_status-help"
+                id="appointment_id-help"
                 class="block p-error"
                 *ngIf="
-                    userForm?.get('marital_status')?.invalid &&
-                    userForm?.get('marital_status')?.dirty
+                    paymentsForm?.get('appointment_id')?.invalid &&
+                    paymentsForm?.get('appointment_id')?.dirty
                 "
             >
-                Marital_status is Required</small
+                Appointment_id is Required</small
             >
         </div>
-        <div class="field">
-            <p-dropdown
-                class="block"
-                [style]="{ width: '100%' }"
-                [options]="genderOptions"
-                formControlName="isActive"
-                optionLabel="name"
-                [filter]="true"
-                filterBy="name"
-                [showClear]="true"
-                placeholder="  Gender"
-                formControlName="gender"
-            >
-                <ng-template let-service pTemplate="item">
-                    <div class="flex align-items-center gap-2">
-                        <div>{{ service.name }}</div>
-                    </div>
-                </ng-template>
-            </p-dropdown>
-            <small
-                id="usergender-help"
-                class="block p-error"
-                *ngIf="
-                    userForm?.get('gender')?.invalid &&
-                    userForm?.get('gender')?.dirty
-                "
-            >
-                Gender is Required</small
-            >
-        </div>
-
-        <div class="field">
+         <div class="field">
             <input
-                type="date"
+                type="text"
                 pInputText
-                placeholder=" Date_of_birth"
-                formControlName="date_of_birth"
+                placeholder="  Amount"
+                formControlName="amount"
                 [style]="{ width: '100%' }"
             />
             <small
-                id="userdate_of_birth-help"
+                id="paymentsamount-help"
                 class="block p-error"
                 *ngIf="
-                    userForm?.get('date_of_birth')?.invalid &&
-                    userForm?.get('date_of_birth')?.dirty
+                    paymentsForm?.get('amount')?.invalid &&
+                    paymentsForm?.get('amount')?.dirty
                 "
             >
-                Date_of_birth is Required</small
+                Amount is Required</small
             >
         </div>
+                <div class="field">
+            <input
+            type="text"
+            pInputText
+                placeholder="Payment_mode"
+                formControlName="payment_mode"
+                [style]="{ width: '100%' }"
+            />
 
+            <small
+                id="paymentsphone_number-help"
+                class="block p-error"
+                *ngIf="
+                    paymentsForm?.get('payment_mode')?.invalid &&
+                    paymentsForm?.get('payment_mode')?.dirty
+                "
+            >
+                Payment_mode is Required</small
+            >
+        </div>
+       
         @if(mode === 'add'){
         <button
             pButton
             label="Submit"
             type="submit"
-            [disabled]="userForm.invalid"
-            (click)="adduser()"
+            [disabled]="paymentsForm.invalid"
+            (click)="addpayments()"
         ></button>
         } @if(mode === 'edit'){
         <button
             pButton
             label="Update"
-            (click)="updateUser()"
+            (click)="updatePayments()"
             type="submit"
-            [disabled]="userForm.invalid"
+            [disabled]="paymentsForm.invalid"
         ></button>
         }
     </form>

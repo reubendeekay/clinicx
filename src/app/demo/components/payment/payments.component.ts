@@ -30,8 +30,8 @@ export class PaymentsComponent {
     ) {}
     payments: any = [];
     mode: string = 'add';
-    selecteduser: any = [];
-    selectedUser: any;
+    selectedpayments: any = [];
+    selectedPayments: any;
 
     visible: boolean = false;
 
@@ -40,18 +40,19 @@ export class PaymentsComponent {
     }
 
     ngOnInit() {
-        this.fetchuseres();
-        this.selecteduser = [];
+        this.fetchpaymentses();
+        this.selectedpayments = [];
+        this.fetchappointments();
     }
 
-    fetchuseres() {
+    fetchpaymentses() {
         this.apiservice.fetchPayments().subscribe(
             (response: any) => {
                 // Handle the API response
                 console.log('API response:', response);
 
                 this.payments = response;
-                // this.userForm.controls['code'].setValue(this.useres.length + 1);
+                // this.paymentsForm.controls['code'].setValue(this.paymentses.length + 1);
             },
             (error) => {
                 // Handle the API error
@@ -60,20 +61,20 @@ export class PaymentsComponent {
         );
     }
 
-    // deleteSelectedUseres() {}
+    // deleteSelectedPaymentses() {}
 
-    onCheckboxChange(event: any, user: any) {
-        console.log(user.id);
+    onCheckboxChange(event: any, payments: any) {
+        console.log(payments.id);
 
         if (event.target.checked) {
-            this.selecteduser = [];
+            this.selectedpayments = [];
 
-            this.selecteduser.push(user.id);
+            this.selectedpayments.push(payments.id);
         } else {
-            this.selecteduser = [];
+            this.selectedpayments = [];
         }
         console.log('fuck');
-        console.log(this.selecteduser);
+        console.log(this.selectedpayments);
     }
 
     maritalOptions = [
@@ -91,38 +92,27 @@ export class PaymentsComponent {
         { name: 'AB' },
     ];
 
-    userForm = this.fb.group({
-        email: ['', Validators.required],
-        phone_number: ['', Validators.required],
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        gender: ['', Validators.required],
-        date_of_birth: ['', Validators.required],
-        marital_status: ['', Validators.required],
-        password: ['', Validators.required],
+    paymentsForm = this.fb.group({
+        appointment_id: ['', Validators.required],
+        amount: ['', Validators.required],
+        payment_date: ['', Validators.required],
+        payment_mode: ['', Validators.required],
     });
 
     isStatusOptions: any = [{ name: 'true' }, { name: 'false' }];
 
-    adduser() {
+    addpayments() {
         this.mode = 'add';
         // const active =
 
-        if (this.userForm.valid) {
+        if (this.paymentsForm.valid) {
             const payload = {
-                ...this.userForm.value,
-                role: 'patient',
-                user_image:
-                    'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
-                marital_status: Object.values(
-                    this.userForm.value.marital_status
-                )[0],
-                gender: Object.values(this.userForm.value.gender)[0],
+                ...this.paymentsForm.value,
             };
 
             console.log(`Payload: ${JSON.stringify(payload)}`);
 
-            this.apiservice.createUser(payload).subscribe(
+            this.apiservice.createPayment(payload).subscribe(
                 (response: any) => {
                     // Handle the API response
                     console.log('API response:', response);
@@ -130,7 +120,7 @@ export class PaymentsComponent {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Confirmed',
-                            detail: 'You have successfully created a user',
+                            detail: 'You have successfully created a payments',
                         });
 
                         setTimeout(() => {
@@ -141,7 +131,7 @@ export class PaymentsComponent {
                         this.messageService.add({
                             severity: 'error',
                             summary: 'Error',
-                            detail: 'User Creation Failed. Try again Later!',
+                            detail: 'Payments Creation Failed. Try again Later!',
                         });
 
                         setTimeout(() => {
@@ -155,7 +145,7 @@ export class PaymentsComponent {
                     this.messageService.add({
                         severity: 'error',
                         summary: error.error[0].detail,
-                        detail: 'User Creation Failed. Try again Later!',
+                        detail: 'Payments Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
                         this.visible = false;
@@ -166,37 +156,52 @@ export class PaymentsComponent {
             this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
-                detail: 'User Creation Failed. Try again Later!',
+                detail: 'Payments Creation Failed. Try again Later!',
             });
         }
     }
 
-    editUser(user: any) {
-        if (this.selecteduser.length !== 0) {
+    appointments: any = [];
+
+    fetchappointments() {
+        this.apiservice.fetchAppointments().subscribe(
+            (response: any) => {
+                // Handle the API response
+                console.log('API response:', response);
+
+                response.map((item) => this.appointments.push({ name: item.id }));
+            console.log('appointments' + JSON.stringify(this.appointments));
+
+            },
+            (error) => {
+                // Handle the API error
+                console.error('API error:', error);
+            }
+        );
+    }
+
+    editPayments(payments: any) {
+        if (this.selectedpayments.length !== 0) {
             this.visible = true;
             this.mode = 'edit';
             console.log(this.mode);
-            if (user) {
-                this.selectedUser = { ...user };
-                this.userForm.patchValue({
-                    email: user.email,
-                    phone_number: user.phone_number,
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    gender: user.gender,
-                    marital_status: user.marital_status,
-                    date_of_birth: user.date_of_birth,
-                    password: user.password,
+            if (payments) {
+                this.selectedPayments = { ...payments };
+                this.paymentsForm.patchValue({
+                    appointment_id: payments.appointment_id,
+                    amount: payments.amount,
+                    payment_date: payments.payment_date,
+                    payment_mode: payments.payment_mode,
                 });
             } else {
-                this.selectedUser = null;
-                this.userForm.reset();
+                this.selectedPayments = null;
+                this.paymentsForm.reset();
             }
         } else {
             this.messageService.add({
                 severity: 'info',
                 summary: 'Notification',
-                detail: 'Please Select a user',
+                detail: 'Please Select a payments',
             });
         }
     }
@@ -204,16 +209,16 @@ export class PaymentsComponent {
     formattedPayments: any = [];
     filename: string = `Clinicx Patients`;
     exportexcel() {
-        for (const user of this.payments) {
+        for (const payments of this.payments) {
             this.formattedPayments.push({
-                email: user.email,
-                phone_number: user.phone_number,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                gender: user.gender,
-                marital_status: user.marital_status,
-                date_of_birth: user.date_of_birth,
-                password: user.password,
+                email: payments.email,
+                phone_number: payments.phone_number,
+                first_name: payments.first_name,
+                last_name: payments.last_name,
+                gender: payments.gender,
+                marital_status: payments.marital_status,
+                date_of_birth: payments.date_of_birth,
+                password: payments.password,
             });
         }
 
@@ -227,67 +232,62 @@ export class PaymentsComponent {
         XLSX.writeFile(wb, this.filename);
     }
 
-    updateUser() {
-        if (this.userForm.valid) {
+    updatePayments() {
+        if (this.paymentsForm.valid) {
             const payload = {
-                ...this.userForm.value,
-                role: 'patient',
-                user_image:
-                    'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=',
-                marital_status: Object.values(
-                    this.userForm.value.marital_status
-                )[0],
-                gender: Object.values(this.userForm.value.gender)[0],
+                ...this.paymentsForm.value,
             };
 
             console.log(`Payload: ${JSON.stringify(payload)}`);
 
-            this.apiservice.updateUser(this.selecteduser[0], payload).subscribe(
-                (response: any) => {
-                    // Handle the API response
-                    console.log('API response:', response);
-                    if (response) {
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Confirmed',
-                            detail: 'You have succesfully Updated a user',
-                        });
+            this.apiservice
+                .updatePayment(this.selectedpayments[0], payload)
+                .subscribe(
+                    (response: any) => {
+                        // Handle the API response
+                        console.log('API response:', response);
+                        if (response) {
+                            this.messageService.add({
+                                severity: 'success',
+                                summary: 'Confirmed',
+                                detail: 'You have succesfully Updated a payments',
+                            });
 
-                        setTimeout(() => {
-                            this.visible = false;
-                        }, 2000);
-                        this.selecteduser = [];
-                        this.route.navigate(['dashboard/payments']);
-                    } else {
+                            setTimeout(() => {
+                                this.visible = false;
+                            }, 2000);
+                            this.selectedpayments = [];
+                            this.route.navigate(['dashboard/payments']);
+                        } else {
+                            this.messageService.add({
+                                severity: 'error',
+                                summary: 'Error',
+                                detail: 'Payments Update Failed. Try again Later!',
+                            });
+
+                            setTimeout(() => {
+                                this.visible = false;
+                            }, 2000);
+                        }
+                    },
+                    (error) => {
+                        // Handle the API error
+                        console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: 'Error',
-                            detail: 'User Update Failed. Try again Later!',
+                            summary: error.error[0].detail,
+                            detail: 'Payments Update Failed. Try again Later!',
                         });
-
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
                     }
-                },
-                (error) => {
-                    // Handle the API error
-                    console.error('API error:', error);
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: error.error[0].detail,
-                        detail: 'User Update Failed. Try again Later!',
-                    });
-                    setTimeout(() => {
-                        this.visible = false;
-                    }, 2000);
-                }
-            );
+                );
         } else {
             this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
-                detail: 'User Update Failed. Try again Later!',
+                detail: 'Payments Update Failed. Try again Later!',
             });
         }
     }
@@ -302,30 +302,32 @@ export class PaymentsComponent {
             rejectIcon: 'none',
             rejectButtonStyleClass: 'p-button-text',
             accept: () => {
-                if (this.selecteduser.length !== 0) {
-                    this.apiservice.deleteUser(this.selecteduser).subscribe(
-                        (response: any) => {
-                            // Handle the API response
-                            console.log('API response:', response);
+                if (this.selectedpayments.length !== 0) {
+                    this.apiservice
+                        .deletePayment(this.selectedpayments)
+                        .subscribe(
+                            (response: any) => {
+                                // Handle the API response
+                                console.log('API response:', response);
 
-                            // Refresh the useres after deletion
-                            this.fetchuseres();
-                        },
-                        (error) => {
-                            // Handle the API error
-                            console.error('API error:', error);
-                        }
-                    );
+                                // Refresh the paymentses after deletion
+                                this.fetchpaymentses();
+                            },
+                            (error) => {
+                                // Handle the API error
+                                console.error('API error:', error);
+                            }
+                        );
                     this.messageService.add({
                         severity: 'success',
                         summary: 'Confirmed',
-                        detail: 'You have successfully deleted the user',
+                        detail: 'You have successfully deleted the payments',
                     });
                 } else {
                     this.messageService.add({
                         severity: 'info',
                         summary: 'Notification',
-                        detail: 'Please Select a user',
+                        detail: 'Please Select a payments',
                     });
                 }
             },

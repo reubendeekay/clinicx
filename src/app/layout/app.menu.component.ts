@@ -29,17 +29,17 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Users',
-                        icon: 'pi pi-fw pi-id-card',
+                        icon: 'pi pi-fw pi-users',
                         routerLink: ['/dashboard/usersmanagement'],
                     },
                     {
                         label: 'Doctor Management',
-                        icon: 'pi pi-fw pi-check-square',
+                        icon: 'pi pi-fw pi-briefcase',
                         routerLink: ['/dashboard/doctormanagement'],
                     },
                     {
                         label: 'Patient Management',
-                        icon: 'pi pi-fw pi-check-square',
+                        icon: 'pi pi-fw pi-user-edit',
                         routerLink: ['/dashboard/patientmanagement'],
                     },
                 ],
@@ -49,12 +49,12 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Service Management',
-                        icon: 'pi pi-fw pi-eye',
+                        icon: 'pi pi-fw pi-cog',
                         routerLink: ['/dashboard/services'],
                     },
                     {
                         label: 'Branch Management',
-                        icon: 'pi pi-fw pi-eye',
+                        icon: 'pi pi-fw pi-home',
                         routerLink: ['/dashboard/branch'],
                     },
                 ],
@@ -64,26 +64,26 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Appointment Management',
-                        icon: 'pi pi-fw pi-eye',
+                        icon: 'pi pi-fw pi-list',
                         routerLink: ['/dashboard/appointmentsmanagement'],
                     },
                     {
                         label: 'Payments Management',
-                        icon: 'pi pi-fw pi-eye',
+                        icon: 'pi pi-fw pi-money-bill',
                         routerLink: ['/dashboard/paymentsmanagement'],
                     },
                 ],
             },
-            {
-                label: 'Logout',
-                items: [
-                    {
-                        label: 'Logout',
-                        icon: 'pi pi-fw pi-sign-out',
-                        routerLink: ['/'],
-                    },
-                ],
-            },
+            // {
+            //     label: 'Logout',
+            //     items: [
+            //         {
+            //             label: 'Logout',
+            //             icon: 'pi pi-fw pi-sign-out',
+            //             routerLink: ['/'],
+            //         },
+            //     ],
+            // },
         ];
     }
 
