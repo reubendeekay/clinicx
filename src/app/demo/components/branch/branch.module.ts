@@ -9,7 +9,7 @@ import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule , FormsModule} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
@@ -39,6 +39,7 @@ import { ToastModule } from 'primeng/toast';
         MessageModule,
         ConfirmDialogModule,
         ToastModule,
+        FormsModule
     ],
     declarations: [BranchComponent],
     providers: [MessageService, ConfirmationService],

@@ -16,6 +16,14 @@
             Download as CSV
         </button>
     </div>
+    <!-- <div>
+        <input
+            type="text"
+            placeholder="Search by Branch Name"
+            [(ngModel)]="search_query"
+        />
+        <button (click)="searchBranchesByName()">Search</button>
+    </div> -->
 </div>
 
 <div class="dashboard">
@@ -190,6 +198,7 @@
                     pInputText
                     placeholder="Address"
                     formControlName="address"
+                    (ngModelChange)="onAddressChange()"
                     [style]="{ width: '100%' }"
                 />
                 <small

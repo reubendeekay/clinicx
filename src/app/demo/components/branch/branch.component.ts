@@ -21,6 +21,63 @@ import { MessageService, ConfirmationService } from 'primeng/api';
     styleUrls: ['./branch.component.css'],
 })
 export class BranchComponent {
+    search_query: string = '';
+
+    onAddressChange() {
+        const address = this.branchForm.get('address')?.value;
+        if (address) {
+            this.getCoordinates(address);
+        }
+    }
+
+    getCoordinates(address: string) {
+        // Replace 'YOUR_API_KEY' with your actual API key
+        const apiKey = 'AIzaSyC3b-legecW26W0xiOOm9NUC0RyD1ZxeFY';
+        const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+            address
+        )}&key=${apiKey}`;
+
+        this.http.get<any>(apiUrl).subscribe(
+            (response) => {
+                if (
+                    response &&
+                    response.results &&
+                    response.results.length > 0
+                ) {
+                    const location = response.results[0].geometry.location;
+                    this.branchForm.patchValue({
+                        latitude: location.lat,
+                        longitude: location.lng,
+                    });
+                } else {
+                    console.error(
+                        'Geocoding API response is empty or invalid.'
+                    );
+                }
+            },
+            (error) => {
+                console.error(
+                    'Error occurred while fetching coordinates:',
+                    error
+                );
+            }
+        );
+    }
+
+    originalBranches: any = [];
+
+    searchBranchesByName() {
+        if (!this.search_query.trim()) {
+            // If search query is empty or consists only of whitespace
+            this.originalBranches = [...this.branches]; // Reset to original branches
+            return;
+        }
+        // Filter branches by name
+        this.branches = this.originalBranches.filter((branch: any) =>
+            branch.name.toLowerCase().includes(this.search_query.toLowerCase())
+        );
+    }
+
     constructor(
         private http: HttpClient,
         private fb: FormBuilder,

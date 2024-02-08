@@ -1,5 +1,8 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Users</h3>
+     <button class="mb-5 mr-10" pButton (click)="exportexcel()">
+            Download as CSV
+        </button>
     <div class="icons">
         <div (click)="showDialog(); mode = 'add'; userForm.reset()">
             <i class="pi pi-plus"></i>

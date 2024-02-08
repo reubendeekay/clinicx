@@ -7,6 +7,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { ApiService } from '../../../Services/api.service';
 import { AuthService } from '../../../Services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -185,7 +186,7 @@ export class UsersComponent {
                     gender: user.gender,
                     marital_status: user.marital_status,
                     date_of_birth: user.date_of_birth,
-                    password: user.password
+                    password: user.password,
                 });
             } else {
                 this.selectedUser = null;
@@ -263,6 +264,31 @@ export class UsersComponent {
                 detail: 'User Update Failed. Try again Later!',
             });
         }
+    }
+
+    formattedRecords: any = [];
+    filename: string = `Clinicx Users.xlsx`;
+    exportexcel() {
+        for (const user of this.users) {
+            this.formattedRecords.push({
+                email: user.email,
+                phone_number: user.phone_number,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                gender: user.gender,
+                marital_status: user.marital_status,
+                date_of_birth: user.date_of_birth,
+                password: user.password,
+            });
+        }
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+            this.formattedRecords
+        );
+
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, this.filename);
     }
 
     confirm1(event: Event) {
