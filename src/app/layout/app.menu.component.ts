@@ -66,6 +66,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-eye',
                         routerLink: ['/dashboard/appointmentsmanagement'],
                     },
+                    {
+                        label: 'Payments Management',
+                        icon: 'pi pi-fw pi-eye',
+                        routerLink: ['/dashboard/paymentsmanagement'],
+                    },
                 ],
             },
             {

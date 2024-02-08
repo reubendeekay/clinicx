@@ -61,6 +61,13 @@ import { LoginComponent} from './demo/components/Login/login.component';
                                     './demo/components/users/users.module'
                                 ).then((m) => m.UsersModule),
                         },
+                        {
+                            path: 'payments',
+                            loadChildren: () =>
+                                import(
+                                    './demo/components/payment/payments.module'
+                                ).then((m) => m.PaymentsModule),
+                        },
                     ],
                 },
                 {
