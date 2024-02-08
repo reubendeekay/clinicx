@@ -14,6 +14,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import * as XLSX from 'xlsx';
+import { FormControl  } from '@angular/forms';
 
 @Component({
     selector: 'app-patientmanagement',
@@ -26,15 +27,15 @@ export class PatientmanagementComponent {
     exportexcel() {
         for (const patientmanagement of this.patientmanagement) {
             this.formattedPayments.push({
-                first_name: patientmanagement.first_name,
-                last_name: patientmanagement.last_name,
-                about: patientmanagement.about,
-                address: patientmanagement.address,
-                email: patientmanagement.email,
-                phone_number: patientmanagement.phone_number,
-                blood_group: patientmanagement.blood_group,
-                marital_status: patientmanagement.marital_status,
-                date_of_birth: patientmanagement.date_of_birth,
+                'First Name': patientmanagement.first_name,
+                'Last Name': patientmanagement.last_name,
+                Email: patientmanagement.email,
+                'Marital Status': patientmanagement.marital_status,
+                'Phone Number': patientmanagement.phone_number,
+                Address: patientmanagement.address,
+                'Blood Group': patientmanagement.blood_group,
+                'Date of Birth': patientmanagement.date_of_birth,
+                About: patientmanagement.about,
             });
         }
         const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
@@ -147,6 +148,15 @@ export class PatientmanagementComponent {
         console.log(this.selectedpatientmanagement);
     }
 
+          // Define the custom validator function for future dates
+          futureDateValidator(control: FormControl) {
+            const selectedDate = new Date(control.value);
+            const currentDate = new Date();
+            if (selectedDate > currentDate) {
+                return { futureDate: true };
+            }
+            return null;
+        }
     patientmanagementForm = this.fb.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
@@ -155,7 +165,7 @@ export class PatientmanagementComponent {
         phone_number: ['', Validators.required],
         address: ['', Validators.required],
         blood_group: ['', Validators.required],
-        date_of_birth: ['', Validators.required],
+        date_of_birth: ['', [Validators.required,this.futureDateValidator]],
         about: ['', Validators.required],
         gender: ['', Validators.required],
         // user_image:['', Validators.required],

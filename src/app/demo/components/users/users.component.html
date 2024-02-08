@@ -246,22 +246,31 @@
         <div class="field">
             <input
                 type="date"
+                formControlName="date_of_birth"
                 pInputText
                 placeholder=" Date_of_birth"
-                formControlName="date_of_birth"
                 [style]="{ width: '100%' }"
             />
             <small
                 id="userdate_of_birth-help"
                 class="block p-error"
                 *ngIf="
-                    userForm?.get('date_of_birth')?.invalid &&
-                    userForm?.get('date_of_birth')?.dirty
+                    (userForm?.get('date_of_birth')?.invalid &&
+                    userForm?.get('date_of_birth')?.dirty &&
+                    !userForm?.get('date_of_birth')?.errors?.futureDate) ||
+                    (userForm?.get('date_of_birth')?.errors?.required &&
+                    userForm?.get('date_of_birth')?.touched)
                 "
             >
-                Date_of_birth is Required</small
-            >
+                <span *ngIf="userForm?.get('date_of_birth')?.errors?.required">
+                    Date_of_birth is Required
+                </span>
+                <span *ngIf="userForm?.get('date_of_birth')?.errors?.futureDate">
+                    Date_of_birth must not be a future date
+                </span>
+            </small>
         </div>
+        
 
         @if(mode === 'add'){
         <button
