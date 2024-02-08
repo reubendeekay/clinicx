@@ -29,7 +29,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Users',
                         icon: 'pi pi-fw pi-id-card',
-                        routerLink: ['dashboard/users'],
+                        routerLink: ['/dashboard/usersmanagement'],
                     },
                     {
                         label: 'Doctor Management',

@@ -54,6 +54,13 @@ import { LoginComponent} from './demo/components/Login/login.component';
                                     './demo/components/appointments/appoinments.module'
                                 ).then((m) => m.AppointmentsModule),
                         },
+                        {
+                            path: 'usersmanagement',
+                            loadChildren: () =>
+                                import(
+                                    './demo/components/users/users.module'
+                                ).then((m) => m.UsersModule),
+                        },
                     ],
                 },
                 {
