@@ -219,7 +219,7 @@ export class PaymentsComponent {
                 (response: any) => {
                     // Handle the API response
                     console.log('API response:', response);
-                    if (response.success) {
+                    if (response) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Confirmed',

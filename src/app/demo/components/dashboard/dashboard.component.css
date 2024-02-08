@@ -1,0 +1,171 @@
+.dashboard {
+  background: linear-gradient(
+    118.7deg,
+    #d8d2fc 17.58%,
+    #d8d2fc 17.58%,
+    #d8d2fc 17.59%,
+    #fde2e0 41.89%,
+    #e6e4ea 68%,
+    #e0e9f4 103.34%,
+    rgba(230, 225, 232, 0) 103.35%,
+    #e0e9f4 103.35%
+  );
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+
+p,
+h3,
+h4 {
+  font-family: "Kanit";
+}
+
+.outter {
+  background-color: rgb(255, 255, 255, 0.6);
+  height: 90%;
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inner {
+  background: radial-gradient(
+    43.3% 107.22% at 51.09% 40.44%,
+    rgba(239, 242, 246, 0.3) 0%,
+    rgb(246, 227, 235, 0.3) 47.58%,
+    rgb(213, 222, 237, 0.3) 93.12%
+  );
+  height: 100%;
+  width: 90%;
+  position: absolute;
+  right: 0;
+  overflow-y: scroll;
+}
+
+.main-content {
+  margin-top: 40px;
+  margin-left: 35px;
+  height: 65%;
+}
+
+.icons {
+  display: flex;
+}
+
+.icons i {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  margin: 0 10px;
+  border-radius: 40%;
+  box-shadow: 0px 4px 15px 0px #d8d2fca3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.charts {
+  display: flex;
+  width: 97%;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.charts div {
+  flex: 1;
+}
+
+.tables {
+  max-width: 97%;
+  width: 97%;
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.tables div:first-child {
+  flex: 2;
+}
+
+.tiles {
+  display: flex;
+  justify-content: space-between;
+  width: 97%;
+  margin-bottom: 30px;
+}
+
+.tiles .card {
+  width: 23%;
+  height: 105px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.tiles div h4 {
+  font-family: "Kanit";
+  color: #7b7b7b;
+  margin-bottom: 0;
+}
+
+.tiles div p {
+  font-family: "Kanit";
+  color: #271e4a;
+  padding-top: 0;
+  font-size: 14px;
+}
+
+/* branchmanagement */
+.active,
+.complete {
+  background-color: #ecfdf3;
+  color: #037847;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.inactive {
+  background-color: #edeff1;
+  color: #364254;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.active::before,
+.inactive::before {
+  content: "\2022";
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 2.2em;
+  color: inherit;
+  vertical-align: middle;
+}
+
+.pending {
+  background-color: #fff5eb;
+  color: #fb7e15;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.cancelled {
+  background-color: #fff5f5;
+  color: #f34a7c;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+/* patient form styles */
+.form div {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+.form div input {
+  flex: 1;
+}

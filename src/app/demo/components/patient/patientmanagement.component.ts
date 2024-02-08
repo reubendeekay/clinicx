@@ -179,7 +179,7 @@ export class PatientmanagementComponent {
                 (response: any) => {
                     // Handle the API response
                     console.log('API response:', response);
-                    if (response.success) {
+                    if (response) {
                         this.messageService.add({
                             severity: 'success',
                             summary: 'Confirmed',
@@ -207,7 +207,7 @@ export class PatientmanagementComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error.detail,
+                        summary: error.error[0].detail,
                         detail: 'Patient Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -283,7 +283,7 @@ export class PatientmanagementComponent {
                     (response: any) => {
                         // Handle the API response
                         console.log('API response:', response);
-                        if (response.success) {
+                        if (response) {
                             this.messageService.add({
                                 severity: 'success',
                                 summary: 'Confirmed',
@@ -311,7 +311,7 @@ export class PatientmanagementComponent {
                         console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: error.error.detail,
+                            summary: error.error[0].detail,
                             detail: 'Patientmanagement Update Failed. Try again Later!',
                         });
                         setTimeout(() => {
