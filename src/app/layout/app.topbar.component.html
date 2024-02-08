@@ -13,15 +13,11 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <span class="flex align-items-center">halimaali.ha2002&#64;gmail.com</span>
+        <span class="flex align-items-center">{{username}}</span>
         <button class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
-            <span>halimaali.ha2002&#64;gmail.com</span>
+            <span>{{username}}</span>
         </button>
        
-        <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
-            <i class="pi pi-sign-out"></i>
-            <span>Log Out</span>
-        </button>
     </div>
 </div>

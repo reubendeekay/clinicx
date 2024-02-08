@@ -16,4 +16,10 @@ export class AuthService {
   isLogged() {
     return sessionStorage.getItem('user') != null;
   }
+
+  LogOut() {
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('login');
+      sessionStorage.removeItem('user');
+  }
 }

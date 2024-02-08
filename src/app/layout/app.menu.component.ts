@@ -1,7 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
-
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html',
@@ -9,7 +10,7 @@ import { LayoutService } from './service/app.layout.service';
 export class AppMenuComponent implements OnInit {
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) {}
+    constructor(public layoutService: LayoutService, public messageService: MessageService, public router: Router) {}
 
     ngOnInit() {
         this.model = [
@@ -78,11 +79,13 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'Logout',
-                        icon: 'pi pi-fw pi-eye',
-                        routerLink: ['/dashboard/patient'],
+                        icon: 'pi pi-fw pi-sign-out',
+                        routerLink: ['/'],
                     },
                 ],
             },
         ];
     }
+
+    
 }

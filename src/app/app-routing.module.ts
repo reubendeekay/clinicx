@@ -2,7 +2,8 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 // import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
-import { LoginComponent} from './demo/components/Login/login.component';
+import { LoginComponent } from './demo/components/Login/login.component';
+import { authGuard } from './Guards/auth.guard.service';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { LoginComponent} from './demo/components/Login/login.component';
                         },
                         {
                             path: 'services',
+                            
                             loadChildren: () =>
                                 import(
                                     './demo/components/services/services.module'

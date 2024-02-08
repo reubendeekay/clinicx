@@ -233,7 +233,7 @@ export class PatientmanagementComponent {
                     console.error('API error:', error);
                     this.messageService.add({
                         severity: 'error',
-                        summary: error.error[0].detail,
+                        summary: error.error.detail,
                         detail: 'Patient Creation Failed. Try again Later!',
                     });
                     setTimeout(() => {
@@ -337,7 +337,7 @@ export class PatientmanagementComponent {
                         console.error('API error:', error);
                         this.messageService.add({
                             severity: 'error',
-                            summary: error.error[0].detail,
+                            summary: error.error.detail,
                             detail: 'Patientmanagement Update Failed. Try again Later!',
                         });
                         setTimeout(() => {

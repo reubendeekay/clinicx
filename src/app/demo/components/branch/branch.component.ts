@@ -191,7 +191,6 @@ export class BranchComponent {
             this.selectedbranch.push(branch.id);
             this.selecteddoctorname = [];
 
-            this.selectedbranch.push(this.branches.id);
             this.branches.filter((item) => {
                 if (this.selectedbranch[0] === item.id) {
                     return this.selecteddoctorname.push(item.name);

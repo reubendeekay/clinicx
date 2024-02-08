@@ -16,6 +16,7 @@ import { RouteReuseStrategy, RouterLink, RouterLinkActive, RouterOutlet } from '
 import { NgToastModule } from 'ng-angular-popup';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
         NodeService,
         PhotoService,
         ProductService,
+        MessageService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     bootstrap: [AppComponent],
