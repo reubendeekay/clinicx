@@ -12,6 +12,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
+import * as XLSX from 'xlsx';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -36,6 +37,29 @@ export class BranchComponent {
     selectedBranch: any;
 
     visible: boolean = false;
+
+    formattedPayments: any = [];
+    filename: string = `Clinicx Branches.xlsx`;
+    exportexcel() {
+        for (const branch of this.branches) {
+            this.formattedPayments.push({
+                name: branch.name,
+                description: branch.description,
+                address: branch.address,
+                phone_number: branch.phone_number,
+                longitude: branch.longitude,
+                latitude: branch.latitude,
+            });
+        }
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+            this.formattedPayments
+        );
+
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, this.filename);
+    }
 
     showDialog() {
         this.visible = true;
@@ -102,7 +126,7 @@ export class BranchComponent {
 
     onCheckboxChange(event: any, branch: any) {
         console.log(branch.id);
-        this.fetchappointments()
+        this.fetchappointments();
 
         if (event.target.checked) {
             this.selectedbranch = [];

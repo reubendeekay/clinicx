@@ -1,13 +1,18 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Services</h3>
-    <button
-        pButton
-        class="mb-5 mr-10"
-        (click)="showDialog(); mode = 'add'; serviceForm.reset()"
-    >
-        <i class="pi pi-plus"></i>
-        Add a Service
-    </button>
+    <div class="flex gap-2">
+        <button class="mb-5 mr-10" pButton (click)="exportexcel()">
+            Download as CSV
+        </button>
+        <button
+            pButton
+            class="mb-5 mr-10"
+            (click)="showDialog(); mode = 'add'; serviceForm.reset()"
+        >
+            <i class="pi pi-plus"></i>
+            Add a Service
+        </button>
+    </div>
 </div>
 
 <p-table

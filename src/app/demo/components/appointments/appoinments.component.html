@@ -1,6 +1,7 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Appointments</h3>
-    <button
+    <div class="flex gap-2">
+         <button
         pButton
         class="mb-5 mr-10"
         (click)="showDialog(); mode = 'add'; appointmentsForm.reset()"
@@ -8,6 +9,10 @@
         <i class="pi pi-plus"></i>
         Add an Appointment
     </button>
+     <button class="mb-5 mr-10" pButton (click)="exportexcel()">
+            Download as CSV
+        </button>
+    </div>
         <div class="icons">
         <div
             (click)="showDialog(); mode = 'add'; appointmentsForm.reset()"

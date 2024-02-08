@@ -1,7 +1,7 @@
 <div>
     <h3 class="topbartitle mb-5">Manage Patients</h3>
        <div class="flex gap-2">
-        <button pButton (click)="confirm1($event)">Download as CSV</button>
+        <button pButton (click)="exportexcel()">Download as CSV</button>
         <button pButton class="outlined" (click)="showtableDialog()">
             See a Patient's appointment
         </button>
@@ -97,7 +97,7 @@ c
                 </p-table>
                 <p-dialog
                     header="{{
-                        mode === 'add' ? 'ADD A BRANCH' : 'EDIT A BRANCH'
+                        mode === 'add' ? 'ADD A PANTIENT' : 'EDIT A PANTIENT'
                     }}"
                     [(visible)]="visible"
                     [modal]="true"

@@ -11,6 +11,7 @@ import { ApiService } from '../../../Services/api.service';
 import { AuthService } from '../../../Services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -49,6 +50,29 @@ export class AppointmentsComponent {
         this.fetchpatientmanagement();
     }
 
+    formattedRecords: any = [];
+    filename: string = `Clinicx Appointments.xlsx`;
+    exportexcel() {
+        for (const appointments of this.appointments) {
+            this.formattedRecords.push({
+                patient_id: appointments.patient_id,
+                doctor_id: appointments.doctor_id,
+                service_id: appointments.service_id,
+                appointment_date: appointments.appointment_date,
+                appointment_time: appointments.appointment_time,
+                reason: appointments.reason,
+            });
+        }
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+            this.formattedRecords
+        );
+
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, this.filename);
+    }
+
     fetchappointments() {
         this.apiservice.fetchAppointments().subscribe(
             (response: any) => {
@@ -79,7 +103,6 @@ export class AppointmentsComponent {
 
                 this.allservices = response;
                 response.map((item) => this.services.push({ name: item.name }));
-
             },
             (error) => {
                 // Handle the API error
@@ -130,7 +153,6 @@ export class AppointmentsComponent {
     class: any = 'p-datatable-sm';
 
     onCheckboxChange(event: any, appointments: any) {
-
         if (event.target.checked) {
             this.selectedappointments = [];
 
@@ -179,7 +201,7 @@ export class AppointmentsComponent {
                 }
             })[0];
 
-              const doctorID = doctor ? doctor.id : null;
+            const doctorID = doctor ? doctor.id : null;
             const payload = {
                 ...this.appointmentsForm.value,
                 service_id: serviceID,
@@ -268,38 +290,38 @@ export class AppointmentsComponent {
 
     updateAppointments() {
         if (this.appointmentsForm.valid) {
-           const serviceID = this.allservices.filter((item) => {
-               if (
-                   item.name ==
-                   Object.values(this.appointmentsForm.value.service_id)
-               ) {
-                   return item.id;
-               }
-           })[0].id;
-           const patientID = this.allPatients.filter((item) => {
-               if (
-                   item.phone_number ==
-                   Object.values(this.appointmentsForm.value.patient_id)
-               ) {
-                   return item.id;
-               }
-           })[0].id;
-           const doctor = this.alldoctors.filter((item) => {
-               if (
-                   item.user.phone_number ==
-                   Object.values(this.appointmentsForm.value.doctor_id)
-               ) {
-                   return item.id;
-               }
-           })[0];
+            const serviceID = this.allservices.filter((item) => {
+                if (
+                    item.name ==
+                    Object.values(this.appointmentsForm.value.service_id)
+                ) {
+                    return item.id;
+                }
+            })[0].id;
+            const patientID = this.allPatients.filter((item) => {
+                if (
+                    item.phone_number ==
+                    Object.values(this.appointmentsForm.value.patient_id)
+                ) {
+                    return item.id;
+                }
+            })[0].id;
+            const doctor = this.alldoctors.filter((item) => {
+                if (
+                    item.user.phone_number ==
+                    Object.values(this.appointmentsForm.value.doctor_id)
+                ) {
+                    return item.id;
+                }
+            })[0];
 
-           const doctorID = doctor ? doctor.id : null;
-           const payload = {
-               ...this.appointmentsForm.value,
-               service_id: serviceID,
-               patient_id: patientID,
-               doctor_id: doctorID,
-           };
+            const doctorID = doctor ? doctor.id : null;
+            const payload = {
+                ...this.appointmentsForm.value,
+                service_id: serviceID,
+                patient_id: patientID,
+                doctor_id: doctorID,
+            };
             console.log(`Payload: ${JSON.stringify(payload)}`);
 
             this.apiservice

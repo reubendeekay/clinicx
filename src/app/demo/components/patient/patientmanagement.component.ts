@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import * as XLSX from 'xlsx';
 
 @Component({
     selector: 'app-patientmanagement',
@@ -20,6 +21,32 @@ import { MessageService, ConfirmationService } from 'primeng/api';
     styleUrls: ['./patientmanagement.component.css'],
 })
 export class PatientmanagementComponent {
+    formattedPayments: any = [];
+    filename: string = `Clinicx Patients.xlsx`;
+    exportexcel() {
+        for (const patientmanagement of this.patientmanagement) {
+            this.formattedPayments.push({
+                first_name: patientmanagement.first_name,
+                last_name: patientmanagement.last_name,
+                about: patientmanagement.about,
+                address: patientmanagement.address,
+                email: patientmanagement.email,
+                phone_number: patientmanagement.phone_number,
+                blood_group: patientmanagement.blood_group,
+                marital_status: patientmanagement.marital_status,
+                date_of_birth: patientmanagement.date_of_birth,
+            });
+        }
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+            this.formattedPayments
+        );
+
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, this.filename);
+    }
+
     constructor(
         private http: HttpClient,
         private fb: FormBuilder,
@@ -112,8 +139,7 @@ export class PatientmanagementComponent {
                     return this.selecteddoctorname.push(item.first_name);
                 }
             });
-        this.fetchappointments();
-
+            this.fetchappointments();
         } else {
             this.selectedpatientmanagement = [];
             this.selecteddoctorname = [];

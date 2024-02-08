@@ -8,7 +8,7 @@ import { ApiService } from '../../../Services/api.service';
 import { AuthService } from '../../../Services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { MessageService, ConfirmationService } from 'primeng/api';
-
+import * as XLSX from 'xlsx';
 @Component({
     selector: 'app-services',
     templateUrl: './services.component.html',
@@ -71,7 +71,6 @@ export class ServicesComponent {
         } else {
             this.selectedservice = [];
         }
-        console.log('fuck');
         console.log(this.selectedservice);
     }
 
@@ -114,11 +113,11 @@ export class ServicesComponent {
                         }, 2000);
                         this.route.navigate(['dashboard/services']);
                     } else {
-                         this.messageService.add({
-                             severity: 'error',
-                             summary: 'Error',
-                             detail: 'Service Creation Failed. Try again Later!',
-                         });
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Service Creation Failed. Try again Later!',
+                        });
 
                         setTimeout(() => {
                             this.visible = false;
@@ -147,6 +146,26 @@ export class ServicesComponent {
         }
     }
 
+    formattedRecords: any = [];
+    filename: string = `Clinicx Service.xlsx`;
+    exportexcel() {
+        for (const service of this.services) {
+            this.formattedRecords.push({
+                name: service.name,
+                price: service.price,
+                isActive: service.is_active,
+            });
+        }
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+            this.formattedRecords
+        );
+
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, this.filename);
+    }
+
     editService(service: any) {
         if (this.selectedservice.length !== 0) {
             this.visible = true;
@@ -164,11 +183,11 @@ export class ServicesComponent {
                 this.serviceForm.reset();
             }
         } else {
-           this.messageService.add({
-               severity: 'info',
-               summary: 'Notification',
-               detail: 'Please Select a service',
-           });
+            this.messageService.add({
+                severity: 'info',
+                summary: 'Notification',
+                detail: 'Please Select a service',
+            });
         }
     }
     updateService() {
@@ -202,11 +221,11 @@ export class ServicesComponent {
                             this.selectedservice = [];
                             this.route.navigate(['dashboard/services']);
                         } else {
-                           this.messageService.add({
-                               severity: 'error',
-                               summary: 'Error',
-                               detail: 'Service Update Failed. Try again Later!',
-                           });
+                            this.messageService.add({
+                                severity: 'error',
+                                summary: 'Error',
+                                detail: 'Service Update Failed. Try again Later!',
+                            });
 
                             setTimeout(() => {
                                 this.visible = false;
@@ -216,22 +235,22 @@ export class ServicesComponent {
                     (error) => {
                         // Handle the API error
                         console.error('API error:', error);
-                       this.messageService.add({
-                           severity: 'error',
-                           summary: error.error.detail,
-                           detail: 'Service Update Failed. Try again Later!',
-                       });
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: error.error.detail,
+                            detail: 'Service Update Failed. Try again Later!',
+                        });
                         setTimeout(() => {
                             this.visible = false;
                         }, 2000);
                     }
                 );
         } else {
-           this.messageService.add({
-               severity: 'error',
-               summary: 'Error',
-               detail: 'Service Update Failed. Try again Later!',
-           });
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Service Update Failed. Try again Later!',
+            });
         }
     }
 
