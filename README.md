@@ -28,7 +28,7 @@ Welcome to the ClinicX Admin Web View, a powerful tool designed for administrato
 
 ## Support
 
-For any technical assistance or inquiries regarding the ClinicX Admin Web View, please contact our support team at [sydneykanjie@gmail.com](mailto:sydneykanjie@gmail.com).
+For any technical assistance or inquiries regarding the ClinicX Admin Web View, please contact our support team at [clinicxsupport@gmail.com](mailto:sydneykanjie@gmail.com).
 
 ## About Us
 
